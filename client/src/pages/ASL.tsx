@@ -165,7 +165,7 @@ export default function ASL() {
           </nav>
           <a
             href="#prepare"
-            className="px-4 py-2 rounded-lg bg-yellow-400 text-black text-sm font-bold hover:bg-yellow-300 transition-colors"
+            className="px-4 py-2 rounded-lg bg-gradient-to-r from-yellow-300 to-amber-500 text-black text-sm font-bold shadow-md shadow-yellow-500/25 hover:brightness-110 transition-all duration-300"
           >
             Prepare for your call
           </a>
@@ -190,7 +190,7 @@ export default function ASL() {
               the call building your plan — not explaining the basics.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a href="#prepare" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-yellow-400 text-black font-bold hover:bg-yellow-300 transition-colors">
+              <a href="#prepare" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 text-black font-bold shadow-lg shadow-yellow-500/25 hover:shadow-yellow-400/40 hover:brightness-110 transition-all duration-300">
                 <Play className="w-4 h-4" /> Watch the prep video
               </a>
               <a href="#results" className="px-6 py-3 rounded-xl border border-yellow-400/50 text-yellow-400 font-semibold hover:bg-yellow-400/10 transition-colors">
@@ -209,7 +209,7 @@ export default function ASL() {
 
         <div className="relative max-w-6xl mx-auto mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
           {STATS.map((s) => (
-            <div key={s.label} className="rounded-2xl border border-yellow-500/20 bg-gray-950/80 p-5 text-center">
+            <div key={s.label} className="rounded-2xl border border-yellow-500/25 bg-gradient-to-b from-[#15110a] to-[#0a0806] transition-all duration-500 hover:border-yellow-400/50/80 p-5 text-center">
               <s.icon className="w-5 h-5 text-yellow-400 mx-auto mb-2" />
               <p className="text-2xl md:text-3xl font-bold text-white">{s.value}</p>
               <p className="text-xs md:text-sm text-gray-400 mt-1">{s.label}</p>
@@ -219,12 +219,12 @@ export default function ASL() {
       </section>
 
       {/* PREPARE */}
-      <section id="prepare" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10">
+      <section id="prepare" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
           <SectionHead eyebrow="Before your call" title="3 steps. 10 minutes." sub="Do these before the call and you'll leave with a clear plan." />
           <div className="grid md:grid-cols-3 gap-5 mb-14">
             {PREP_STEPS.map((p) => (
-              <div key={p.n} className="rounded-2xl border border-yellow-500/20 bg-gray-950 p-6">
+              <div key={p.n} className="rounded-2xl border border-yellow-500/25 bg-gradient-to-b from-[#15110a] to-[#0a0806] transition-all duration-500 hover:border-yellow-400/50 p-6">
                 <p className="text-yellow-400 font-bold text-sm tracking-widest mb-3">STEP {p.n}</p>
                 <h3 className="text-xl font-bold mb-2">{p.title}</h3>
                 <p className="text-gray-400 leading-relaxed">{p.body}</p>
@@ -246,7 +246,7 @@ export default function ASL() {
       </section>
 
       {/* PROGRAM */}
-      <section id="program" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10">
+      <section id="program" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-yellow-400 mb-3">Inside the program</p>
@@ -273,19 +273,19 @@ export default function ASL() {
       </section>
 
       {/* RESULTS */}
-      <section id="results" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10">
+      <section id="results" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
           <ClientResults initial={9} />
         </div>
       </section>
 
       {/* CASE STUDIES */}
-      <section className="px-4 py-24 border-t border-yellow-500/10">
+      <section className="px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
           <SectionHead eyebrow="In their words" title="Client case studies" sub="Hear it straight from the men who did it." />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {cases.map((c) => (
-              <div key={c.id} className="rounded-2xl border border-yellow-500/20 bg-gray-950 overflow-hidden">
+              <div key={c.id} className="rounded-2xl border border-yellow-500/25 bg-gradient-to-b from-[#15110a] to-[#0a0806] transition-all duration-500 hover:border-yellow-400/50 overflow-hidden">
                 <div className="aspect-video bg-black">
                   <iframe
                     src={`https://www.youtube.com/embed/${c.id}?quality=hd&vq=hd720`}
@@ -314,7 +314,7 @@ export default function ASL() {
       </section>
 
       {/* COACHES */}
-      <section id="coaches" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10 text-center">
+      <section id="coaches" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15 text-center">
         <div className="max-w-6xl mx-auto">
           <SectionHead eyebrow="Who you'll work with" title="Meet your coaches" sub="Maho leads nutrition and fat loss. Sash leads training and muscle. You get both." />
           <div className="-mt-16">
@@ -324,14 +324,14 @@ export default function ASL() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10">
+      <section id="faq" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-3xl mx-auto">
           <SectionHead eyebrow="Questions" title="Before your call" sub="Short answers on video. Watch the ones on your mind." />
           <div className="space-y-3">
             {objectionVideos.map((v) => {
               const open = openFaq === v.id;
               return (
-                <div key={v.id} className="rounded-2xl border border-yellow-500/20 bg-gray-950 overflow-hidden">
+                <div key={v.id} className="rounded-2xl border border-yellow-500/25 bg-gradient-to-b from-[#15110a] to-[#0a0806] transition-all duration-500 hover:border-yellow-400/50 overflow-hidden">
                   <button
                     onClick={() => setOpenFaq(open ? null : v.id)}
                     className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-gray-900/60 transition-colors"
@@ -363,7 +363,7 @@ export default function ASL() {
       </section>
 
       {/* FINAL */}
-      <section className="px-4 py-24 border-t border-yellow-500/10">
+      <section className="px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-3xl mx-auto text-center rounded-3xl border border-yellow-500/30 bg-gradient-to-b from-yellow-500/10 to-transparent p-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">You're all set.</h2>
           <p className="text-gray-300 text-lg mb-8">

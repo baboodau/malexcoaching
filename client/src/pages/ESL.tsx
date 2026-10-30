@@ -77,7 +77,7 @@ function BookButton({ className = "" }: { className?: string }) {
   return (
     <a
       href="#book"
-      className={`inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-yellow-400 text-black font-bold hover:bg-yellow-300 transition-colors ${className}`}
+      className={`inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 text-black font-bold shadow-lg shadow-yellow-500/25 hover:shadow-yellow-400/40 hover:brightness-110 transition-all duration-300 ${className}`}
     >
       Book my free strategy call <ArrowRight className="w-4 h-4" />
     </a>
@@ -90,6 +90,14 @@ export default function ESL() {
 
   useEffect(() => {
     document.title = "Malex Coaching | Busy Men Transform Their Physique";
+    // After a booking in the embedded Calendly, stay on this site's confirmation page
+    const onMessage = (e: MessageEvent) => {
+      if (typeof e.origin === "string" && e.origin.includes("calendly.com") && e.data?.event === "calendly.event_scheduled") {
+        window.location.href = "/booking-confirmed";
+      }
+    };
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
   }, []);
 
   const cases = showAllCases ? caseStudies : caseStudies.slice(0, 6);
@@ -112,7 +120,7 @@ export default function ESL() {
               </a>
             ))}
           </nav>
-          <a href="#book" className="px-4 py-2 rounded-lg bg-yellow-400 text-black text-sm font-bold hover:bg-yellow-300 transition-colors">
+          <a href="#book" className="px-4 py-2 rounded-lg bg-gradient-to-r from-yellow-300 to-amber-500 text-black text-sm font-bold shadow-md shadow-yellow-500/25 hover:brightness-110 transition-all duration-300">
             Book free call
           </a>
         </div>
@@ -151,7 +159,7 @@ export default function ESL() {
 
         <div className="relative max-w-6xl mx-auto mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
           {STATS.map((s) => (
-            <div key={s.label} className="rounded-2xl border border-yellow-500/20 bg-gray-950/80 p-5 text-center">
+            <div key={s.label} className="rounded-2xl border border-yellow-500/25 bg-gradient-to-b from-[#15110a] to-[#0a0806] transition-all duration-500 hover:border-yellow-400/50/80 p-5 text-center">
               <s.icon className="w-5 h-5 text-yellow-400 mx-auto mb-2" />
               <p className="text-2xl md:text-3xl font-bold text-white">{s.value}</p>
               <p className="text-xs md:text-sm text-gray-400 mt-1">{s.label}</p>
@@ -161,12 +169,12 @@ export default function ESL() {
       </section>
 
       {/* PROBLEM */}
-      <section className="px-4 py-24 border-t border-yellow-500/10">
+      <section className="px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
           <SectionHead eyebrow="Sound familiar?" title="Successful everywhere except the mirror." />
           <div className="grid md:grid-cols-3 gap-5">
             {PROBLEMS.map((p) => (
-              <div key={p.tag} className="rounded-2xl border border-yellow-500/20 bg-gray-950 p-6">
+              <div key={p.tag} className="rounded-2xl border border-yellow-500/25 bg-gradient-to-b from-[#15110a] to-[#0a0806] transition-all duration-500 hover:border-yellow-400/50 p-6">
                 <p className="text-yellow-400 font-bold text-xs tracking-widest uppercase mb-3">{p.tag}</p>
                 <h3 className="text-xl font-bold mb-2">{p.title}</h3>
                 <p className="text-gray-400 leading-relaxed">{p.body}</p>
@@ -177,7 +185,7 @@ export default function ESL() {
       </section>
 
       {/* METHOD */}
-      <section id="method" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10">
+      <section id="method" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
           <SectionHead eyebrow="The Malex method" title="Plan. Train. Keep it." sub="A system built around your life, not the other way round." />
           <div className="grid md:grid-cols-3 gap-5">
@@ -193,7 +201,7 @@ export default function ESL() {
       </section>
 
       {/* WHAT YOU GET ON THE CALL */}
-      <section id="call" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10">
+      <section id="call" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
           <SectionHead eyebrow="The free strategy call" title="What you'll get on the call" sub="An interactive breakdown of your personalized strategy." />
           <CallBenefitsAnimation />
@@ -204,11 +212,11 @@ export default function ESL() {
       </section>
 
       {/* BOOK */}
-      <section id="book" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10">
+      <section id="book" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-3xl mx-auto">
           <SectionHead eyebrow="30-minute strategy call" title="I'm ready to change my life" sub="Pick a time that works best for you." />
           <div className="rounded-2xl border border-yellow-500/30 p-1 bg-gray-950">
-            <iframe title="Book your call" src={CALENDLY} width="100%" height="650" frameBorder="0" className="rounded-xl"></iframe>
+            <iframe title="Book your call" src={`${CALENDLY}&embed_type=Inline&embed_domain=${typeof window !== "undefined" ? window.location.host : "malexcoaching.com"}`} width="100%" height="650" frameBorder="0" className="rounded-xl"></iframe>
           </div>
           <ul className="mt-8 grid sm:grid-cols-3 gap-3 text-sm text-gray-300">
             {["Free, no obligation", "Personal plan on the call", "Spots are limited"].map((t) => (
@@ -221,7 +229,7 @@ export default function ESL() {
       </section>
 
       {/* RESULTS */}
-      <section id="results" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10">
+      <section id="results" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
           <ClientResults initial={12} />
           <div className="flex justify-center mt-12">
@@ -231,7 +239,7 @@ export default function ESL() {
       </section>
 
       {/* COACHES */}
-      <section id="coaches" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10 text-center">
+      <section id="coaches" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15 text-center">
         <div className="max-w-6xl mx-auto">
           <SectionHead eyebrow="Who you'll work with" title="Meet your coaches" sub="Maho leads nutrition and fat loss. Sash leads training and muscle. You get both." />
           <div className="-mt-16">
@@ -241,12 +249,12 @@ export default function ESL() {
       </section>
 
       {/* CASE STUDIES */}
-      <section className="px-4 py-24 border-t border-yellow-500/10">
+      <section className="px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
           <SectionHead eyebrow="In their words" title="Client case studies" sub="See what is possible when the right system is built around your lifestyle." />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {cases.map((c) => (
-              <div key={c.id} className="rounded-2xl border border-yellow-500/20 bg-gray-950 overflow-hidden">
+              <div key={c.id} className="rounded-2xl border border-yellow-500/25 bg-gradient-to-b from-[#15110a] to-[#0a0806] transition-all duration-500 hover:border-yellow-400/50 overflow-hidden">
                 <div className="aspect-video bg-black">
                   <iframe
                     src={`https://www.youtube.com/embed/${c.id}?quality=hd&vq=hd720`}
@@ -275,14 +283,14 @@ export default function ESL() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10">
+      <section id="faq" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-3xl mx-auto">
           <SectionHead eyebrow="Questions" title="Before you book" />
           <div className="space-y-3">
             {FAQS.map((f, i) => {
               const open = openFaq === i;
               return (
-                <div key={f.q} className="rounded-2xl border border-yellow-500/20 bg-gray-950 overflow-hidden">
+                <div key={f.q} className="rounded-2xl border border-yellow-500/25 bg-gradient-to-b from-[#15110a] to-[#0a0806] transition-all duration-500 hover:border-yellow-400/50 overflow-hidden">
                   <button
                     onClick={() => setOpenFaq(open ? null : i)}
                     className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-gray-900/60 transition-colors"
@@ -299,7 +307,7 @@ export default function ESL() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="px-4 py-24 border-t border-yellow-500/10">
+      <section className="px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-3xl mx-auto text-center rounded-3xl border border-yellow-500/30 bg-gradient-to-b from-yellow-500/10 to-transparent p-10">
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-yellow-400 mb-3">Limited 1-on-1 spots</p>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Ready to build your best physique?</h2>
