@@ -74,7 +74,7 @@ export default function ESL() {
         <div className="relative z-10 max-w-5xl mx-auto">
           {/* Logo */}
           <div className="flex justify-center mb-12" style={{ transform: `translateY(${scrollY * 0.1}px)` }}>
-            <img src="/media/malex-logo-ring.jpg" alt="Malex Coaching" className="w-56 h-56 md:w-72 md:h-72 rounded-3xl object-cover shadow-2xl shadow-yellow-500/20" />
+            <img src="/media/malex-logo-galaxy.jpg" alt="Malex Coaching" className="w-80 md:w-[30rem] aspect-[828/462] rounded-3xl object-cover shadow-2xl shadow-yellow-500/20" />
           </div>
 
           {/* Main headline with gold accent and underline */}
@@ -99,7 +99,7 @@ export default function ESL() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-2xl mx-auto">
             <div className="flex items-center justify-center gap-3 text-yellow-400 stagger-1">
               <Users className="w-5 h-5" />
-              <span className="font-semibold text-sm">100+ Clients Helped</span>
+              <span className="font-semibold text-sm">200+ Clients Helped</span>
             </div>
             <div className="flex items-center justify-center gap-3 text-yellow-400 stagger-2">
               <Zap className="w-5 h-5" />
@@ -213,18 +213,18 @@ export default function ESL() {
       {/* Divider */}
       <div className="h-px bg-gradient-to-r from-transparent via-yellow-600/30 to-transparent"></div>
 
-      {/* SECTION 4: SOCIAL PROOF - OVER 100 SUCCESSFUL CLIENTS */}
+      {/* SECTION 4: SOCIAL PROOF - OVER 200 SUCCESSFUL CLIENTS */}
       <section data-animate className="py-32 px-4 bg-black grid-bg">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-            Over 100 Successful Clients
+            Over 200 Successful Clients
           </h2>
           <p className="text-center text-gray-400 mb-16">
             Real clients. Real transformations. And so many more.
           </p>
 
           {/* Client results (from Miro) */}
-          <ClientResults />
+          <ClientResults heading={false} />
         </div>
       </section>
 
