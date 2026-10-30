@@ -4,53 +4,52 @@ type Result = {
   name: string;
   result: string;
   type: "fat" | "muscle";
-  cols: number;
-  imgs: string[];
+  img: string;
 };
 
 // Client transformations (Malex Miro board, Step 04 — The Proof).
 // Every photo is its own equal-size box; each card's photo area is square.
 const RESULTS: Result[] = [
-  { name: "Paul", result: "3 months -11kg/24lbs", type: "fat", cols: 2, imgs: ["/media/c01-1.jpg", "/media/c01-2.jpg"] },
-  { name: "Isaac", result: "4 months -15kg/33lbs", type: "fat", cols: 2, imgs: ["/media/c02-1.jpg", "/media/c02-2.jpg"] },
-  { name: "Dave", result: "2 months -10kg/22lbs", type: "fat", cols: 2, imgs: ["/media/c03-1.jpg", "/media/c03-2.jpg", "/media/c03-3.jpg", "/media/c03-4.jpg"] },
-  { name: "Jacob", result: "6 months -21kg/46lbs", type: "fat", cols: 2, imgs: ["/media/c04-1.jpg", "/media/c04-2.jpg"] },
-  { name: "Jack", result: "2 months -6kg/13lbs", type: "fat", cols: 2, imgs: ["/media/c05-1.jpg", "/media/c05-2.jpg"] },
-  { name: "Mark", result: "-20kg/44lbs", type: "fat", cols: 2, imgs: ["/media/c06-1.jpg", "/media/c06-2.jpg"] },
-  { name: "Ryan", result: "4 months -20kg/44lbs", type: "fat", cols: 2, imgs: ["/media/c07-1.jpg", "/media/c07-2.jpg"] },
-  { name: "Andrey", result: "2 months -7kg/15lbs", type: "fat", cols: 2, imgs: ["/media/c08-1.jpg", "/media/c08-2.jpg"] },
-  { name: "Isaiah", result: "2 months -6kg/13lbs", type: "fat", cols: 2, imgs: ["/media/c09-1.jpg", "/media/c09-2.jpg"] },
-  { name: "Daniel", result: "4 months -20kg/44lbs", type: "fat", cols: 2, imgs: ["/media/c10-1.jpg", "/media/c10-2.jpg"] },
-  { name: "Justin", result: "6 months -16kg/35lbs", type: "fat", cols: 2, imgs: ["/media/c11-1.jpg", "/media/c11-2.jpg", "/media/c11-3.jpg", "/media/c11-4.jpg"] },
-  { name: "Darsh", result: "3 months -13kg/28lbs + abs", type: "fat", cols: 2, imgs: ["/media/c12-1.jpg", "/media/c12-2.jpg"] },
-  { name: "Benjamin", result: "2 months -7kg/15lbs", type: "fat", cols: 2, imgs: ["/media/c13-1.jpg", "/media/c13-2.jpg"] },
-  { name: "Mark", result: "4 months -15kg/33lbs", type: "fat", cols: 2, imgs: ["/media/c14-1.jpg", "/media/c14-2.jpg"] },
-  { name: "Samuel", result: "3 months -12kg/24lbs", type: "fat", cols: 2, imgs: ["/media/c15-1.jpg", "/media/c15-2.jpg"] },
-  { name: "James", result: "6 months -20kg/44lbs", type: "fat", cols: 2, imgs: ["/media/c16-1.jpg", "/media/c16-2.jpg"] },
-  { name: "Mo", result: "3 months -19kg/42lbs", type: "fat", cols: 4, imgs: ["/media/c17-1.jpg", "/media/c17-2.jpg", "/media/c17-3.jpg", "/media/c17-4.jpg"] },
-  { name: "Ryan", result: "8 months -30kg/66lbs", type: "fat", cols: 2, imgs: ["/media/c00-1.jpg", "/media/c00-2.jpg"] },
-  { name: "David", result: "2 months +6kg/13lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c18-1.jpg", "/media/c18-2.jpg"] },
-  { name: "Alexander", result: "6 months +16kg/35lbs + abs", type: "muscle", cols: 1, imgs: ["/media/c19-1.jpg", "/media/c19-2.jpg"] },
-  { name: "Hamza", result: "4 months +9kg/20lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c20-1.jpg", "/media/c20-2.jpg"] },
-  { name: "Thomas", result: "3 months +9kg/20lbs", type: "muscle", cols: 4, imgs: ["/media/c21-1.jpg", "/media/c21-2.jpg", "/media/c21-3.jpg", "/media/c21-4.jpg"] },
-  { name: "Eric", result: "6 months +15kg/30lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c22-1.jpg", "/media/c22-2.jpg"] },
-  { name: "White", result: "3 months +10kg/22lbs", type: "muscle", cols: 2, imgs: ["/media/c23-1.jpg", "/media/c23-2.jpg"] },
-  { name: "Lamar", result: "3 months (got abs)", type: "muscle", cols: 2, imgs: ["/media/c24-1.jpg", "/media/c24-2.jpg"] },
-  { name: "Arham", result: "6 months +15kg/33lbs", type: "muscle", cols: 1, imgs: ["/media/c25-1.jpg", "/media/c25-2.jpg"] },
-  { name: "Luke", result: "3 months +9kg/19lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c26-1.jpg", "/media/c26-2.jpg"] },
-  { name: "Omar", result: "6 months +18kg/39lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c27-1.jpg", "/media/c27-2.jpg"] },
-  { name: "Chris", result: "+10kg/20lbs + abs", type: "muscle", cols: 3, imgs: ["/media/c28-1.jpg", "/media/c28-2.jpg", "/media/c28-3.jpg", "/media/c28-4.jpg", "/media/c28-5.jpg", "/media/c28-6.jpg"] },
-  { name: "Adam", result: "4 months +14kg/30lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c29-1.jpg", "/media/c29-2.jpg"] },
-  { name: "Bazil", result: "2 months +6kg/13lbs", type: "muscle", cols: 3, imgs: ["/media/c30-1.jpg", "/media/c30-2.jpg", "/media/c30-3.jpg", "/media/c30-4.jpg", "/media/c30-5.jpg", "/media/c30-6.jpg"] },
-  { name: "Elias", result: "2 months +6kg/13lbs", type: "muscle", cols: 2, imgs: ["/media/c31-1.jpg", "/media/c31-2.jpg", "/media/c31-3.jpg", "/media/c31-4.jpg"] },
-  { name: "Abraham", result: "3 months +12kg/24lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c32-1.jpg", "/media/c32-2.jpg", "/media/c32-3.jpg", "/media/c32-4.jpg"] },
-  { name: "Fice", result: "12 months +23kg/50lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c33-1.jpg", "/media/c33-2.jpg"] },
-  { name: "Hakeem", result: "6 months +17kg/37lbs got abs", type: "muscle", cols: 2, imgs: ["/media/c34-1.jpg", "/media/c34-2.jpg"] },
-  { name: "Arham", result: "4 months +9kg/19lbs", type: "muscle", cols: 2, imgs: ["/media/c35-1.jpg", "/media/c35-2.jpg"] },
-  { name: "Justin", result: "3 months +10kg/20lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c36-1.jpg", "/media/c36-2.jpg", "/media/c36-3.jpg", "/media/c36-4.jpg"] },
-  { name: "Carlos", result: "2 months +7kg/15lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c37-1.jpg", "/media/c37-2.jpg"] },
-  { name: "Ryan", result: "4 months +14kg/31lbs", type: "muscle", cols: 2, imgs: ["/media/c38-1.jpg", "/media/c38-2.jpg"] },
-  { name: "Ciro", result: "3 months +9kg/19lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c39-1.jpg", "/media/c39-2.jpg"] },
+  { name: "Paul", result: "3 months -11kg/24lbs", type: "fat", img: "/media/res-c01.jpg" },
+  { name: "Isaac", result: "4 months -15kg/33lbs", type: "fat", img: "/media/res-c02.jpg" },
+  { name: "Dave", result: "2 months -10kg/22lbs", type: "fat", img: "/media/res-c03.jpg" },
+  { name: "Jacob", result: "6 months -21kg/46lbs", type: "fat", img: "/media/res-c04.jpg" },
+  { name: "Jack", result: "2 months -6kg/13lbs", type: "fat", img: "/media/res-c05.jpg" },
+  { name: "Mark", result: "-20kg/44lbs", type: "fat", img: "/media/res-c06.jpg" },
+  { name: "Ryan", result: "4 months -20kg/44lbs", type: "fat", img: "/media/res-c07.jpg" },
+  { name: "Andrey", result: "2 months -7kg/15lbs", type: "fat", img: "/media/res-c08.jpg" },
+  { name: "Isaiah", result: "2 months -6kg/13lbs", type: "fat", img: "/media/res-c09.jpg" },
+  { name: "Daniel", result: "4 months -20kg/44lbs", type: "fat", img: "/media/res-c10.jpg" },
+  { name: "Justin", result: "6 months -16kg/35lbs", type: "fat", img: "/media/res-c11.jpg" },
+  { name: "Darsh", result: "3 months -13kg/28lbs + abs", type: "fat", img: "/media/res-c12.jpg" },
+  { name: "Benjamin", result: "2 months -7kg/15lbs", type: "fat", img: "/media/res-c13.jpg" },
+  { name: "Mark", result: "4 months -15kg/33lbs", type: "fat", img: "/media/res-c14.jpg" },
+  { name: "Samuel", result: "3 months -12kg/24lbs", type: "fat", img: "/media/res-c15.jpg" },
+  { name: "James", result: "6 months -20kg/44lbs", type: "fat", img: "/media/res-c16.jpg" },
+  { name: "Mo", result: "3 months -19kg/42lbs", type: "fat", img: "/media/res-c17.jpg" },
+  { name: "Ryan", result: "8 months -30kg/66lbs", type: "fat", img: "/media/res-c00.jpg" },
+  { name: "David", result: "2 months +6kg/13lbs + abs", type: "muscle", img: "/media/res-c18.jpg" },
+  { name: "Alexander", result: "6 months +16kg/35lbs + abs", type: "muscle", img: "/media/res-c19.jpg" },
+  { name: "Hamza", result: "4 months +9kg/20lbs + abs", type: "muscle", img: "/media/res-c20.jpg" },
+  { name: "Thomas", result: "3 months +9kg/20lbs", type: "muscle", img: "/media/res-c21.jpg" },
+  { name: "Eric", result: "6 months +15kg/30lbs + abs", type: "muscle", img: "/media/res-c22.jpg" },
+  { name: "White", result: "3 months +10kg/22lbs", type: "muscle", img: "/media/res-c23.jpg" },
+  { name: "Lamar", result: "3 months (got abs)", type: "muscle", img: "/media/res-c24.jpg" },
+  { name: "Arham", result: "6 months +15kg/33lbs", type: "muscle", img: "/media/res-c25.jpg" },
+  { name: "Luke", result: "3 months +9kg/19lbs + abs", type: "muscle", img: "/media/res-c26.jpg" },
+  { name: "Omar", result: "6 months +18kg/39lbs + abs", type: "muscle", img: "/media/res-c27.jpg" },
+  { name: "Chris", result: "+10kg/20lbs + abs", type: "muscle", img: "/media/res-c28.jpg" },
+  { name: "Adam", result: "4 months +14kg/30lbs + abs", type: "muscle", img: "/media/res-c29.jpg" },
+  { name: "Bazil", result: "2 months +6kg/13lbs", type: "muscle", img: "/media/res-c30.jpg" },
+  { name: "Elias", result: "2 months +6kg/13lbs", type: "muscle", img: "/media/res-c31.jpg" },
+  { name: "Abraham", result: "3 months +12kg/24lbs + abs", type: "muscle", img: "/media/res-c32.jpg" },
+  { name: "Fice", result: "12 months +23kg/50lbs + abs", type: "muscle", img: "/media/res-c33.jpg" },
+  { name: "Hakeem", result: "6 months +17kg/37lbs got abs", type: "muscle", img: "/media/res-c34.jpg" },
+  { name: "Arham", result: "4 months +9kg/19lbs", type: "muscle", img: "/media/res-c35.jpg" },
+  { name: "Justin", result: "3 months +10kg/20lbs + abs", type: "muscle", img: "/media/res-c36.jpg" },
+  { name: "Carlos", result: "2 months +7kg/15lbs + abs", type: "muscle", img: "/media/res-c37.jpg" },
+  { name: "Ryan", result: "4 months +14kg/31lbs", type: "muscle", img: "/media/res-c38.jpg" },
+  { name: "Ciro", result: "3 months +9kg/19lbs + abs", type: "muscle", img: "/media/res-c39.jpg" },
 ];
 
 const FILTERS = [
@@ -85,9 +84,9 @@ export function ClientResults({ initial = 12, heading = true }: Props) {
               setFilter(f.key);
               setShowAll(false);
             }}
-            className={`px-5 py-2 rounded-full text-sm font-semibold border transition-colors ${
+            className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-300 ${
               filter === f.key
-                ? "bg-yellow-400 text-black border-yellow-400"
+                ? "bg-gradient-to-r from-yellow-300 to-amber-500 text-black border-transparent shadow-md shadow-yellow-500/30"
                 : "border-yellow-500/30 text-gray-300 hover:border-yellow-400 hover:text-yellow-300"
             }`}
           >
@@ -100,26 +99,24 @@ export function ClientResults({ initial = 12, heading = true }: Props) {
         {visible.map((r) => (
           <figure
             key={r.name + r.result}
-            className="rounded-2xl border border-yellow-500/30 bg-gray-950 overflow-hidden hover:border-yellow-400/70 transition-colors"
+            className="group rounded-3xl p-[1px] bg-gradient-to-b from-yellow-400/60 via-yellow-600/25 to-yellow-900/10 shadow-lg shadow-yellow-900/20 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-yellow-500/25"
           >
-            <div
-              className="aspect-square grid gap-1 bg-black p-1"
-              style={{ gridTemplateColumns: `repeat(${r.cols}, minmax(0, 1fr))` }}
-            >
-              {r.imgs.map((src, i) => (
+            <div className="rounded-3xl overflow-hidden bg-gradient-to-b from-[#17120a] to-[#0a0806]">
+              <div className="aspect-[5/4] overflow-hidden">
                 <img
-                  key={src}
-                  src={src}
-                  alt={`${r.name} transformation photo ${i + 1}`}
+                  src={r.img}
+                  alt={`${r.name} before and after`}
                   loading="lazy"
-                  className="w-full h-full object-contain rounded-md bg-black"
+                  className="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                 />
-              ))}
+              </div>
+              <figcaption className="px-4 pt-3 pb-5 text-center">
+                <p className="font-bold text-white text-lg tracking-tight">{r.name}</p>
+                <p className="mt-0.5 font-semibold text-sm bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
+                  {r.result}
+                </p>
+              </figcaption>
             </div>
-            <figcaption className="px-4 py-4 text-center">
-              <p className="font-bold text-white text-lg">{r.name}</p>
-              <p className="text-yellow-400 font-semibold text-sm">{r.result}</p>
-            </figcaption>
           </figure>
         ))}
       </div>
@@ -128,7 +125,7 @@ export function ClientResults({ initial = 12, heading = true }: Props) {
         <div className="flex justify-center mt-10">
           <button
             onClick={() => setShowAll(!showAll)}
-            className="px-8 py-3 rounded-xl border border-yellow-400/50 text-yellow-400 font-semibold hover:bg-yellow-400/10 transition-colors"
+            className="px-8 py-3 rounded-full border border-yellow-400/50 text-yellow-300 font-semibold hover:bg-yellow-400/10 transition-all duration-300"
           >
             {showAll ? "Show less" : `See all ${list.length} transformations`}
           </button>
