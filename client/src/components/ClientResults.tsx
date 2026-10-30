@@ -27,16 +27,16 @@ const RESULTS: Result[] = [
   { name: "Mark", result: "4 months -15kg/33lbs", type: "fat", cols: 2, imgs: ["/media/c14-1.jpg", "/media/c14-2.jpg"] },
   { name: "Samuel", result: "3 months -12kg/24lbs", type: "fat", cols: 2, imgs: ["/media/c15-1.jpg", "/media/c15-2.jpg"] },
   { name: "James", result: "6 months -20kg/44lbs", type: "fat", cols: 2, imgs: ["/media/c16-1.jpg", "/media/c16-2.jpg"] },
-  { name: "Mo", result: "3 months -19kg/42lbs", type: "fat", cols: 2, imgs: ["/media/c17-1.jpg", "/media/c17-2.jpg", "/media/c17-3.jpg", "/media/c17-4.jpg"] },
+  { name: "Mo", result: "3 months -19kg/42lbs", type: "fat", cols: 4, imgs: ["/media/c17-1.jpg", "/media/c17-2.jpg", "/media/c17-3.jpg", "/media/c17-4.jpg"] },
   { name: "Ryan", result: "8 months -30kg/66lbs", type: "fat", cols: 2, imgs: ["/media/c00-1.jpg", "/media/c00-2.jpg"] },
   { name: "David", result: "2 months +6kg/13lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c18-1.jpg", "/media/c18-2.jpg"] },
   { name: "Alexander", result: "6 months +16kg/35lbs + abs", type: "muscle", cols: 1, imgs: ["/media/c19-1.jpg", "/media/c19-2.jpg"] },
   { name: "Hamza", result: "4 months +9kg/20lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c20-1.jpg", "/media/c20-2.jpg"] },
-  { name: "Thomas", result: "3 months +9kg/20lbs", type: "muscle", cols: 2, imgs: ["/media/c21-1.jpg", "/media/c21-2.jpg", "/media/c21-3.jpg", "/media/c21-4.jpg"] },
+  { name: "Thomas", result: "3 months +9kg/20lbs", type: "muscle", cols: 4, imgs: ["/media/c21-1.jpg", "/media/c21-2.jpg", "/media/c21-3.jpg", "/media/c21-4.jpg"] },
   { name: "Eric", result: "6 months +15kg/30lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c22-1.jpg", "/media/c22-2.jpg"] },
   { name: "White", result: "3 months +10kg/22lbs", type: "muscle", cols: 2, imgs: ["/media/c23-1.jpg", "/media/c23-2.jpg"] },
   { name: "Lamar", result: "3 months (got abs)", type: "muscle", cols: 2, imgs: ["/media/c24-1.jpg", "/media/c24-2.jpg"] },
-  { name: "Arham", result: "6 months +15kg/33lbs", type: "muscle", cols: 2, imgs: ["/media/c25-1.jpg", "/media/c25-2.jpg"] },
+  { name: "Arham", result: "6 months +15kg/33lbs", type: "muscle", cols: 1, imgs: ["/media/c25-1.jpg", "/media/c25-2.jpg"] },
   { name: "Luke", result: "3 months +9kg/19lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c26-1.jpg", "/media/c26-2.jpg"] },
   { name: "Omar", result: "6 months +18kg/39lbs + abs", type: "muscle", cols: 2, imgs: ["/media/c27-1.jpg", "/media/c27-2.jpg"] },
   { name: "Chris", result: "+10kg/20lbs + abs", type: "muscle", cols: 3, imgs: ["/media/c28-1.jpg", "/media/c28-2.jpg", "/media/c28-3.jpg", "/media/c28-4.jpg", "/media/c28-5.jpg", "/media/c28-6.jpg"] },
@@ -112,7 +112,7 @@ export function ClientResults({ initial = 12, heading = true }: Props) {
                   src={src}
                   alt={`${r.name} transformation photo ${i + 1}`}
                   loading="lazy"
-                  className="w-full h-full object-cover rounded-md"
+                  className="w-full h-full object-contain rounded-md bg-black"
                 />
               ))}
             </div>
