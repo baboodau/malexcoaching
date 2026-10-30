@@ -6,6 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import ESL from "./pages/ESL";
 import ASL from "./pages/ASL";
+import { TermsOfService, RefundPolicy, PrivacyPolicy } from "./pages/Legal";
 
 
 function Router() {
@@ -13,6 +14,9 @@ function Router() {
     <Switch>
       <Route path={"/"} component={ESL} />
       <Route path={"/booking-confirmed"} component={ASL} />
+      <Route path={"/terms-of-service"} component={TermsOfService} />
+      <Route path={"/refund-policy"} component={RefundPolicy} />
+      <Route path={"/privacy-policy"} component={PrivacyPolicy} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
