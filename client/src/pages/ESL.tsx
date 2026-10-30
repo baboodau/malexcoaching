@@ -511,6 +511,16 @@ export default function ESL() {
       {/* Footer */}
       <footer className="bg-gray-950 py-8 px-4 border-t border-gray-800">
         <div className="max-w-5xl mx-auto text-center text-gray-500 text-sm">
+          <p className="mb-1">Contact us for support</p>
+          <a href="mailto:maho@malexcoaching.com" className="inline-block text-gray-300 hover:text-yellow-400 transition-colors mb-2">
+            maho@malexcoaching.com
+          </a>
+          <nav className="mb-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs">
+            <a href="/terms-of-service" className="hover:text-yellow-400 transition-colors">Terms of Service</a>
+            <a href="/refund-policy" className="hover:text-yellow-400 transition-colors">Refund Policy</a>
+            <a href="/privacy-policy" className="hover:text-yellow-400 transition-colors">Privacy Policy</a>
+            <a href="mailto:maho@malexcoaching.com" className="hover:text-yellow-400 transition-colors">Contact Us</a>
+          </nav>
           <p>© 2026 Malex Coaching. All rights reserved.</p>
         </div>
       </footer>
