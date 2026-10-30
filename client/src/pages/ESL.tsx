@@ -1,519 +1,327 @@
-import { Button } from "@/components/ui/button";
-import { useLocation } from "wouter";
-import { Check, Users, Zap, Target, Award } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Header } from "@/components/Header";
+import { ArrowRight, Check, Clock, Users, Video, ShieldCheck, ChevronDown, Mail } from "lucide-react";
 import { CallBenefitsAnimation } from "@/components/CallBenefitsAnimation";
 import { ClientResults } from "@/components/ClientResults";
 import { Coaches } from "@/components/Coaches";
 
 /**
  * ESL (Entry Sales Letter) - Main Landing Page
- * 
- * Design System: Cinematic Luxury Minimalism
- * - Pure black backgrounds with deep charcoal cards
- * - Warm gold/yellow (#fbbf24) accents for CTAs and highlights
- * - Bold Montserrat typography with generous spacing
- * - Liquid glass buttons with subtle glow effects
- * - Smooth scroll animations and hover interactions
+ * Layout: anchored nav, hero + stats, problem cards, the method, what you get on the call,
+ * booking (Calendly), client results, coaches, case studies, FAQ, final CTA, footer.
  */
 
+const CALENDLY =
+  "https://calendly.com/aleksandrharrison0/aleksandr-harrison-1-1-call?hide_event_type_details=1&hide_gdpr_block=1";
+
+const caseStudies: { id: string; title: string }[] = [
+  { id: "ksrXCFP4SBk", title: "How our 50-year-old client lost all the fat and increased his confidence by x100 in less than a year" },
+  { id: "fuQut2Bjr5s", title: "How our client Lamar got a six-pack in half a year" },
+  { id: "dI_c-D81x-A", title: "How our client David went from 20% body fat to 9% and got abs in ONE month under Malex Coaching" },
+  { id: "ZkyrMRfuXk4", title: "DOWN 20 LBS IN 30 DAYS — Ryan’s Journey" },
+  { id: "7jFHJ7AD_ew", title: "How our client Mark got rid of his chronic joint pain without a doctor at 65 years old" },
+  { id: "s5xMQScpPM8", title: "How our client Andrey lost his beer belly and got a defined jaw as a busy working 9-5 man" },
+  { id: "9czxkZ8H01w", title: "BUILT MUSCLE AND GOT ABS — Humza Case Study" },
+  { id: "c3eYA_Jl8ro", title: "Client loses 19kg" },
+  { id: "zYpu4rwTvac", title: "How our client went from skinny to muscular" },
+  { id: "ipEZpc9lUWI", title: "Don’t watch this if you don’t want to be skinny anymore" },
+  { id: "kBrZj-LJHy8", title: "How to regain your confidence as a skinny guy" },
+  { id: "F6k0vK3xxGc", title: "How our client got big biceps and lost fat" },
+  { id: "zTcWwRDwdOc", title: "Client Success Story" }
+];
+
+const NAV = [
+  { href: "#method", label: "The Method" },
+  { href: "#call", label: "The Call" },
+  { href: "#results", label: "Results" },
+  { href: "#coaches", label: "Coaches" },
+  { href: "#faq", label: "FAQ" },
+];
+
+const STATS = [
+  { icon: Users, value: "200+", label: "clients transformed" },
+  { icon: Clock, value: "3 hrs", label: "of training per week" },
+  { icon: Video, value: "1:1", label: "coaching + weekly check-ins" },
+  { icon: ShieldCheck, value: "Signed", label: "results guarantee" },
+];
+
+const PROBLEMS = [
+  { tag: "Problem 01", title: "No time to live in the gym", body: "Work, family and travel come first. Plans built for people with free time fall apart by week three." },
+  { tag: "Problem 02", title: "Diets that fight your life", body: "Strict meal plans that ignore dinners out, business trips and weekends never last." },
+  { tag: "Problem 03", title: "No one keeping you on track", body: "Without check-ins and someone adjusting the plan, progress stalls and motivation fades." },
+];
+
+const METHOD = [
+  { n: "01", title: "Plan", body: "We map your schedule, food and training history, then build your workout and nutrition plan around your real life." },
+  { n: "02", title: "Train", body: "3 hours a week in Trainerize, with weekly check-ins, progress photos and 24/7 messaging with your coaches." },
+  { n: "03", title: "Keep it", body: "We teach you the habits so you can hold your new physique for life — not just for 12 weeks." },
+];
+
+const FAQS = [
+  { q: "Is the strategy call free?", a: "Yes. It's a free 30-minute call where we look at where you are, what's held you back, and the exact plan to reach your goal." },
+  { q: "Do I need gym experience?", a: "No. Your plan is built for your level and your schedule, and every exercise comes with video guidance." },
+  { q: "How much time does it take?", a: "Around 3 hours of training a week. Nutrition and habits are built around the life you already have." },
+  { q: "What if I don't get results?", a: "We sign a results agreement with every client. If you complete 90% of the program and see no results, you get a full refund." },
+];
+
+function SectionHead({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string }) {
+  return (
+    <div className="text-center mb-12">
+      <p className="text-sm font-semibold uppercase tracking-[0.25em] text-yellow-400 mb-3">{eyebrow}</p>
+      <h2 className="text-4xl md:text-5xl font-bold">{title}</h2>
+      {sub && <p className="text-gray-400 mt-4 max-w-2xl mx-auto">{sub}</p>}
+    </div>
+  );
+}
+
+function BookButton({ className = "" }: { className?: string }) {
+  return (
+    <a
+      href="#book"
+      className={`inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-yellow-400 text-black font-bold hover:bg-yellow-300 transition-colors ${className}`}
+    >
+      Book my free strategy call <ArrowRight className="w-4 h-4" />
+    </a>
+  );
+}
+
 export default function ESL() {
-  const [, setLocation] = useLocation();
-  const [scrollY, setScrollY] = useState(0);
+  const [showAllCases, setShowAllCases] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  // Smooth scroll to Calendly section
-  const scrollToCalendly = () => {
-    const element = document.getElementById("calendly-section");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  // Track scroll position for parallax effects
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    document.title = "Malex Coaching | Busy Men Transform Their Physique";
   }, []);
 
-  // Scroll animation observer
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("fade-in-up");
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll("[data-animate]").forEach((el) => {
-      observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  const cases = showAllCases ? caseStudies : caseStudies.slice(0, 6);
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-hidden">
-      <Header />
-
-      {/* SECTION 1: HERO */}
-      <section className="relative min-h-screen flex items-center justify-center pt-32 pb-20 px-4 opacity-0 animate-fade-in bg-black grid-bg">
-        {/* Background gradient glow */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div 
-            className="absolute top-1/4 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-gradient-to-b from-yellow-600/10 to-transparent rounded-full blur-3xl"
-            style={{ transform: `translate(-50%, calc(-50% + ${scrollY * 0.3}px))` }}
-          ></div>
-        </div>
-
-        <div className="relative z-10 max-w-5xl mx-auto">
-          {/* Logo */}
-          <div className="flex justify-center mb-12" style={{ transform: `translateY(${scrollY * 0.1}px)` }}>
-            <img src="/media/malex-logo-galaxy.jpg" alt="Malex Coaching" className="w-80 md:w-[30rem] aspect-[828/462] rounded-3xl object-cover shadow-2xl shadow-yellow-500/20" />
-          </div>
-
-          {/* Main headline with gold accent and underline */}
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-6 leading-tight" style={{ transform: `translateY(${scrollY * 0.05}px)` }}>
-            We Help Busy Men{" "}
-            <span className="relative inline-block">
-              <span className="absolute inset-0 bg-gradient-to-r from-yellow-600 to-yellow-500 rounded-lg -skew-x-12 opacity-25 blur-sm"></span>
-              <span className="relative text-white font-bold">Transform</span>
+    <div className="min-h-screen bg-black text-foreground overflow-x-hidden">
+      {/* NAV */}
+      <header className="sticky top-0 z-50 bg-black/85 backdrop-blur-xl border-b border-yellow-500/15">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+          <a href="/" className="flex items-center gap-3 shrink-0">
+            <img src="/manus-storage/maho-logo_64d5e184.png" alt="Malex Coaching" className="w-10 h-10 rounded-full" />
+            <span className="font-bold leading-tight text-sm">
+              Malex <span className="text-yellow-400">Coaching</span>
             </span>
-            {" "}Their Physique
-          </h1>
-
-          {/* Time commitment */}
-          <p className="text-yellow-400 text-center mb-4 font-semibold">In 3 hours per week</p>
-          
-          {/* Subheadline - smaller text */}
-          <p className="text-sm md:text-base text-gray-400 text-center mb-12 max-w-2xl mx-auto leading-relaxed">
-            Build muscle, lose fat, and create a physique you can maintain for life — with a personalized coaching system designed around your schedule.
-          </p>
-
-          {/* Trust indicators */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-2xl mx-auto">
-            <div className="flex items-center justify-center gap-3 text-yellow-400 stagger-1">
-              <Users className="w-5 h-5" />
-              <span className="font-semibold text-sm">200+ Clients Helped</span>
-            </div>
-            <div className="flex items-center justify-center gap-3 text-yellow-400 stagger-2">
-              <Zap className="w-5 h-5" />
-              <span className="font-semibold text-sm">Busy-Schedule Friendly</span>
-            </div>
-            <div className="flex items-center justify-center gap-3 text-yellow-400 stagger-3">
-              <Target className="w-5 h-5" />
-              <span className="font-semibold text-sm">Personalized Coaching</span>
-            </div>
-          </div>
-
-
-
-          {/* CTA Section - Calendly Embed */}
-          <div id="calendly-section" className="flex justify-center opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <div className="w-full max-w-2xl">
-              {/* Section Header */}
-              <div className="text-center mb-8">
-                <h3 className="text-3xl md:text-4xl font-bold mb-3">Ready to Start Your Transformation?</h3>
-                <p className="text-gray-400 text-lg">Pick a time that works best for you</p>
-                <div className="flex items-center justify-center gap-3 mt-4">
-                  <div className="h-px w-12 bg-gradient-to-r from-yellow-500 to-transparent"></div>
-                  <span className="text-yellow-400 font-semibold text-sm">30-Minute Strategy Call</span>
-                  <div className="h-px w-12 bg-gradient-to-l from-yellow-500 to-transparent"></div>
-                </div>
-              </div>
-              
-              {/* Calendly Embed */}
-              <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 transition-all duration-300">
-                <div className="bg-gradient-to-br from-gray-900 to-gray-950 rounded-lg overflow-hidden">
-                  <iframe
-                    title="Calendly Booking"
-                    src="https://calendly.com/aleksandrharrison0/aleksandr-harrison-1-1-call?hide_event_type_details=1&hide_gdpr_block=1"
-                    width="100%"
-                    height="600"
-                    frameBorder="0"
-                    className="rounded-lg"
-                  ></iframe>
-                </div>
-              </div>
-            </div>
-          </div>
+          </a>
+          <nav className="hidden md:flex items-center gap-6 text-sm text-gray-300">
+            {NAV.map((n) => (
+              <a key={n.href} href={n.href} className="hover:text-yellow-400 transition-colors">
+                {n.label}
+              </a>
+            ))}
+          </nav>
+          <a href="#book" className="px-4 py-2 rounded-lg bg-yellow-400 text-black text-sm font-bold hover:bg-yellow-300 transition-colors">
+            Book free call
+          </a>
         </div>
-      </section>
+      </header>
 
-      {/* Divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-yellow-600/30 to-transparent"></div>
-
-      {/* SECTION 2: WHAT YOU GET ON THE CALL - ANIMATED SOFTWARE INTERFACE */}
-      <section data-animate className="py-32 px-4 bg-black grid-bg relative overflow-hidden">
-        {/* Decorative background elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-72 h-72 bg-gradient-to-b from-yellow-600/8 to-transparent rounded-full blur-3xl parallax-element"></div>
-          <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-gradient-to-t from-yellow-600/8 to-transparent rounded-full blur-3xl parallax-element" style={{ animationDelay: '0.5s' }}></div>
+      {/* HERO */}
+      <section className="relative px-4 pt-14 pb-20 md:pt-24">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[36rem] h-[36rem] bg-yellow-500/10 rounded-full blur-3xl"></div>
         </div>
-
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              What You'll Get On The Call
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              An interactive breakdown of your personalized strategy
+        <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-yellow-400 mb-5">1-on-1 online coaching · busy men</p>
+            <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+              We help busy men <span className="text-yellow-400">transform their physique.</span>
+            </h1>
+            <p className="text-xl font-semibold text-white mb-3">In 3 hours per week.</p>
+            <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+              Build muscle, lose fat, and create a physique you can maintain for life — with a personalized coaching
+              system designed around your schedule.
             </p>
+            <div className="flex flex-wrap gap-3">
+              <BookButton />
+              <a href="#results" className="px-6 py-3.5 rounded-xl border border-yellow-400/50 text-yellow-400 font-semibold hover:bg-yellow-400/10 transition-colors">
+                See client results
+              </a>
+            </div>
+            <p className="text-sm text-gray-500 mt-4">Free 30-minute call. You leave with a clear plan either way.</p>
           </div>
+          <img
+            src="/media/malex-logo-galaxy.jpg"
+            alt="Malex Coaching"
+            className="w-full aspect-[828/462] object-contain rounded-3xl border border-yellow-500/30 shadow-2xl shadow-yellow-500/20 bg-black"
+          />
+        </div>
 
-          {/* Animated Software Interface */}
-          <CallBenefitsAnimation />
-
-
+        <div className="relative max-w-6xl mx-auto mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {STATS.map((s) => (
+            <div key={s.label} className="rounded-2xl border border-yellow-500/20 bg-gray-950/80 p-5 text-center">
+              <s.icon className="w-5 h-5 text-yellow-400 mx-auto mb-2" />
+              <p className="text-2xl md:text-3xl font-bold text-white">{s.value}</p>
+              <p className="text-xs md:text-sm text-gray-400 mt-1">{s.label}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-yellow-600/30 to-transparent"></div>
-
-      {/* SECTION 3: CTA - I'M READY TO CHANGE MY LIFE */}
-      <section data-animate className="py-32 px-4 bg-black grid-bg">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8">
-            I'm Ready To Change My Life
-          </h2>
-
-          {/* CTA Button */}
-          <button
-            onClick={scrollToCalendly}
-            className="relative px-10 py-4 text-lg text-yellow-400 font-bold rounded-xl overflow-hidden group backdrop-blur-md"
-          >
-            {/* Liquid glass background */}
-            <span className="absolute inset-0 bg-gradient-to-br from-yellow-400/30 via-yellow-300/20 to-yellow-500/30 rounded-xl backdrop-blur-lg"></span>
-            <span className="absolute inset-0 border border-yellow-400/40 rounded-xl"></span>
-            <span className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-yellow-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></span>
-            {/* Shine effect */}
-            <span className="absolute inset-0 rounded-xl overflow-hidden">
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 transform -skew-x-12 group-hover:translate-x-full transition-all duration-500"></span>
-            </span>
-            {/* Button text */}
-            <span className="relative flex items-center gap-2 justify-center">
-              <span>Book My Free Strategy Call</span>
-              <span className="text-xl group-hover:translate-x-1 transition-transform duration-300">→</span>
-            </span>
-            {/* Glow effect */}
-            <span className="absolute inset-0 rounded-xl shadow-lg shadow-yellow-400/0 group-hover:shadow-yellow-400/50 transition-shadow duration-300"></span>
-          </button>
-
-          {/* Coaches */}
-          <Coaches />
-        </div>
-      </section>
-
-      {/* Divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-yellow-600/30 to-transparent"></div>
-
-      {/* SECTION 4: SOCIAL PROOF - OVER 200 SUCCESSFUL CLIENTS */}
-      <section data-animate className="py-32 px-4 bg-black grid-bg">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-            Over 200 Successful Clients
-          </h2>
-          <p className="text-center text-gray-400 mb-16">
-            Real clients. Real transformations. And so many more.
-          </p>
-
-          {/* Client results (from Miro) */}
-          <ClientResults heading={false} />
-        </div>
-      </section>
-
-      {/* Divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-yellow-600/30 to-transparent"></div>
-
-      {/* SECTION 4: CLIENT CASE STUDIES */}
-      <section data-animate className="py-32 px-4 bg-black grid-bg">
+      {/* PROBLEM */}
+      <section className="px-4 py-24 border-t border-yellow-500/10">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Client Case Studies
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              See what is possible when the right system is built around your lifestyle.
-            </p>
-          </div>
-
-          {/* Case Study Videos Grid - First 6 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {/* Video 1 */}
-            <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 transition-all duration-300 stagger-1 group">
-              <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/ksrXCFP4SBk?quality=hd&vq=hd720"
-                  title="How our 50-year-old client lost all the fat"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                ></iframe>
+          <SectionHead eyebrow="Sound familiar?" title="Successful everywhere except the mirror." />
+          <div className="grid md:grid-cols-3 gap-5">
+            {PROBLEMS.map((p) => (
+              <div key={p.tag} className="rounded-2xl border border-yellow-500/20 bg-gray-950 p-6">
+                <p className="text-yellow-400 font-bold text-xs tracking-widest uppercase mb-3">{p.tag}</p>
+                <h3 className="text-xl font-bold mb-2">{p.title}</h3>
+                <p className="text-gray-400 leading-relaxed">{p.body}</p>
               </div>
-              <p className="text-center text-gray-300 text-sm mt-4 px-4 pb-4">How our 50-year-old client lost all the fat and increased his confidence by x100 in less than a year</p>
-            </div>
-
-            {/* Video 2 */}
-            <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 transition-all duration-300 stagger-2 group">
-              <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/fuQut2Bjr5s?quality=hd&vq=hd720"
-                  title="How our client Lamar got a six-pack"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                ></iframe>
-              </div>
-              <p className="text-center text-gray-300 text-sm mt-4 px-4 pb-4">How our client Lamar got a six-pack in half a year</p>
-            </div>
-
-            {/* Video 3 */}
-            <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 transition-all duration-300 stagger-3 group">
-              <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/dI_c-D81x-A?quality=hd&vq=hd720"
-                  title="How our client David went from 20% body fat to 9%"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                ></iframe>
-              </div>
-              <p className="text-center text-gray-300 text-sm mt-4 px-4 pb-4">How our client David went from 20% body fat to 9% and got abs in ONE month under Malex Coaching</p>
-            </div>
-
-            {/* Video 4 */}
-            <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 transition-all duration-300 stagger-4 group">
-              <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/ZkyrMRfuXk4?quality=hd&vq=hd720"
-                  title="DOWN 20 LBS IN 30 DAYS"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                ></iframe>
-              </div>
-              <p className="text-center text-gray-300 text-sm mt-4 px-4 pb-4">DOWN 20 LBS IN 30 DAYS — Ryan's Journey</p>
-            </div>
-
-            {/* Video 5 */}
-            <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 transition-all duration-300 stagger-1 group">
-              <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/7jFHJ7AD_ew?quality=hd&vq=hd720"
-                  title="How our client Mark got rid of his chronic joint pain"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                ></iframe>
-              </div>
-              <p className="text-center text-gray-300 text-sm mt-4 px-4 pb-4">How our client Mark got rid of his chronic joint pain without a doctor at 65 years old</p>
-            </div>
-
-            {/* Video 6 */}
-            <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 transition-all duration-300 stagger-2 group">
-              <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/s5xMQScpPM8?quality=hd&vq=hd720"
-                  title="How our client Andrey lost his beer belly"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                ></iframe>
-              </div>
-              <p className="text-center text-gray-300 text-sm mt-4 px-4 pb-4">How our client Andrey lost his beer belly and got a defined jaw as a busy working 9-5 man</p>
-            </div>
-          </div>
-
-          {/* More Client Wins - Additional 6 Videos */}
-          <div className="mb-12">
-            <h3 className="text-2xl font-bold text-center mb-8 text-yellow-400">More Client Wins</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Video 7 */}
-              <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 transition-all duration-300 stagger-3 group">
-                <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/9czxkZ8H01w?quality=hd&vq=hd720"
-                    title="BUILT MUSCLE AND GOT ABS"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                  ></iframe>
-                </div>
-                <p className="text-center text-gray-300 text-sm mt-4 px-4 pb-4">BUILT MUSCLE AND GOT ABS — Humza Case Study</p>
-              </div>
-
-              {/* Video 8 */}
-              <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 transition-all duration-300 stagger-4 group">
-                <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/c3eYA_Jl8ro?quality=hd&vq=hd720"
-                    title="Client loses 19kg"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                  ></iframe>
-                </div>
-                <p className="text-center text-gray-300 text-sm mt-4 px-4 pb-4">Client loses 19kg</p>
-              </div>
-
-              {/* Video 9 */}
-              <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 transition-all duration-300 stagger-1 group">
-                <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/zYpu4rwTvac?quality=hd&vq=hd720"
-                    title="How our client went from skinny to muscular"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                  ></iframe>
-                </div>
-                <p className="text-center text-gray-300 text-sm mt-4 px-4 pb-4">How our client went from skinny to muscular</p>
-              </div>
-
-              {/* Video 10 */}
-              <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 transition-all duration-300 stagger-2 group">
-                <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/ipEZpc9lUWI?quality=hd&vq=hd720"
-                    title="Don't watch this if you don't want to be skinny anymore"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                  ></iframe>
-                </div>
-                <p className="text-center text-gray-300 text-sm mt-4 px-4 pb-4">Don't watch this if you don't want to be skinny anymore</p>
-              </div>
-
-              {/* Video 11 */}
-              <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 transition-all duration-300 stagger-3 group">
-                <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/kBrZj-LJHy8?quality=hd&vq=hd720"
-                    title="How to regain your confidence as a skinny guy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                  ></iframe>
-                </div>
-                <p className="text-center text-gray-300 text-sm mt-4 px-4 pb-4">How to regain your confidence as a skinny guy</p>
-              </div>
-
-              {/* Video 12 */}
-              <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 transition-all duration-300 stagger-4 group">
-                <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/F6k0vK3xxGc?quality=hd&vq=hd720"
-                    title="How our client got big biceps and lost fat"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                  ></iframe>
-                </div>
-                <p className="text-center text-gray-300 text-sm mt-4 px-4 pb-4">How our client got big biceps and lost fat</p>
-              </div>
-
-              {/* Video 13 */}
-              <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 transition-all duration-300 stagger-1 group">
-                <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/zTcWwRDwdOc?quality=hd&vq=hd720"
-                    title="Client Case Study"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                  ></iframe>
-                </div>
-                <p className="text-center text-gray-300 text-sm mt-4 px-4 pb-4">Client Success Story</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-yellow-600/30 to-transparent"></div>
+      {/* METHOD */}
+      <section id="method" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10">
+        <div className="max-w-6xl mx-auto">
+          <SectionHead eyebrow="The Malex method" title="Plan. Train. Keep it." sub="A system built around your life, not the other way round." />
+          <div className="grid md:grid-cols-3 gap-5">
+            {METHOD.map((m) => (
+              <div key={m.n} className="rounded-2xl border border-yellow-500/20 bg-gradient-to-b from-yellow-500/10 to-transparent p-6">
+                <p className="text-4xl font-bold text-yellow-400 mb-4">{m.n}</p>
+                <h3 className="text-xl font-bold mb-2">{m.title}</h3>
+                <p className="text-gray-400 leading-relaxed">{m.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* SECTION 5: FINAL CTA */}
-      <section data-animate className="py-32 px-4 bg-black grid-bg">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Ready To Build Your Best Physique?
-          </h2>
+      {/* WHAT YOU GET ON THE CALL */}
+      <section id="call" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10">
+        <div className="max-w-6xl mx-auto">
+          <SectionHead eyebrow="The free strategy call" title="What you'll get on the call" sub="An interactive breakdown of your personalized strategy." />
+          <CallBenefitsAnimation />
+          <div className="flex justify-center mt-10">
+            <BookButton />
+          </div>
+        </div>
+      </section>
 
-          <p className="text-lg text-gray-300 mb-8">
+      {/* BOOK */}
+      <section id="book" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10">
+        <div className="max-w-3xl mx-auto">
+          <SectionHead eyebrow="30-minute strategy call" title="I'm ready to change my life" sub="Pick a time that works best for you." />
+          <div className="rounded-2xl border border-yellow-500/30 p-1 bg-gray-950">
+            <iframe title="Book your call" src={CALENDLY} width="100%" height="650" frameBorder="0" className="rounded-xl"></iframe>
+          </div>
+          <ul className="mt-8 grid sm:grid-cols-3 gap-3 text-sm text-gray-300">
+            {["Free, no obligation", "Personal plan on the call", "Spots are limited"].map((t) => (
+              <li key={t} className="flex items-center gap-2 justify-center">
+                <Check className="w-4 h-4 text-yellow-400" /> {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* RESULTS */}
+      <section id="results" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10">
+        <div className="max-w-6xl mx-auto">
+          <ClientResults initial={12} />
+          <div className="flex justify-center mt-12">
+            <BookButton />
+          </div>
+        </div>
+      </section>
+
+      {/* COACHES */}
+      <section id="coaches" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10 text-center">
+        <div className="max-w-6xl mx-auto">
+          <SectionHead eyebrow="Who you'll work with" title="Meet your coaches" sub="Maho leads nutrition and fat loss. Sash leads training and muscle. You get both." />
+          <div className="-mt-16">
+            <Coaches />
+          </div>
+        </div>
+      </section>
+
+      {/* CASE STUDIES */}
+      <section className="px-4 py-24 border-t border-yellow-500/10">
+        <div className="max-w-6xl mx-auto">
+          <SectionHead eyebrow="In their words" title="Client case studies" sub="See what is possible when the right system is built around your lifestyle." />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {cases.map((c) => (
+              <div key={c.id} className="rounded-2xl border border-yellow-500/20 bg-gray-950 overflow-hidden">
+                <div className="aspect-video bg-black">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${c.id}?quality=hd&vq=hd720`}
+                    title={c.title}
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  ></iframe>
+                </div>
+                <p className="p-4 text-sm text-gray-300">{c.title}</p>
+              </div>
+            ))}
+          </div>
+          {caseStudies.length > 6 && (
+            <div className="flex justify-center mt-10">
+              <button
+                onClick={() => setShowAllCases(!showAllCases)}
+                className="px-8 py-3 rounded-xl border border-yellow-400/50 text-yellow-400 font-semibold hover:bg-yellow-400/10 transition-colors"
+              >
+                {showAllCases ? "Show less" : `See all ${caseStudies.length} case studies`}
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/10">
+        <div className="max-w-3xl mx-auto">
+          <SectionHead eyebrow="Questions" title="Before you book" />
+          <div className="space-y-3">
+            {FAQS.map((f, i) => {
+              const open = openFaq === i;
+              return (
+                <div key={f.q} className="rounded-2xl border border-yellow-500/20 bg-gray-950 overflow-hidden">
+                  <button
+                    onClick={() => setOpenFaq(open ? null : i)}
+                    className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-gray-900/60 transition-colors"
+                  >
+                    <span className="font-bold text-white">{f.q}</span>
+                    <ChevronDown className={`w-5 h-5 text-yellow-400 shrink-0 transition-transform ${open ? "rotate-180" : ""}`} />
+                  </button>
+                  {open && <p className="px-5 pb-5 text-gray-400 leading-relaxed">{f.a}</p>}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="px-4 py-24 border-t border-yellow-500/10">
+        <div className="max-w-3xl mx-auto text-center rounded-3xl border border-yellow-500/30 bg-gradient-to-b from-yellow-500/10 to-transparent p-10">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-yellow-400 mb-3">Limited 1-on-1 spots</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Ready to build your best physique?</h2>
+          <p className="text-gray-300 text-lg mb-8">
             Book a free strategy call with our team and we'll show you exactly what to do next.
           </p>
-
-          {/* CTA Button */}
-          <button
-            onClick={scrollToCalendly}
-            className="relative px-10 py-4 text-lg text-yellow-400 font-bold rounded-xl overflow-hidden group backdrop-blur-md"
-          >
-            {/* Liquid glass background */}
-            <span className="absolute inset-0 bg-gradient-to-br from-yellow-400/30 via-yellow-300/20 to-yellow-500/30 rounded-xl backdrop-blur-lg"></span>
-            <span className="absolute inset-0 border border-yellow-400/40 rounded-xl"></span>
-            <span className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-yellow-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></span>
-            {/* Shine effect */}
-            <span className="absolute inset-0 rounded-xl overflow-hidden">
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 transform -skew-x-12 group-hover:translate-x-full transition-all duration-500"></span>
-            </span>
-            {/* Button text */}
-            <span className="relative flex items-center gap-2 justify-center">
-              <span>Book My Free Strategy Call</span>
-              <span className="text-xl group-hover:translate-x-1 transition-transform duration-300">→</span>
-            </span>
-            {/* Glow effect */}
-            <span className="absolute inset-0 rounded-xl shadow-lg shadow-yellow-400/0 group-hover:shadow-yellow-400/50 transition-shadow duration-300"></span>
-          </button>
+          <BookButton />
         </div>
       </section>
 
-      {/* Footer */}
+      {/* FOOTER */}
       <footer className="bg-gray-950 py-8 px-4 border-t border-gray-800">
-        <div className="max-w-5xl mx-auto text-center text-gray-500 text-sm">
-          <p className="mb-1">Contact us for support</p>
-          <a href="mailto:maho@malexcoaching.com" className="inline-block text-gray-300 hover:text-yellow-400 transition-colors mb-2">
-            maho@malexcoaching.com
-          </a>
-          <nav className="mb-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+          <p>© 2026 Malex Coaching. All rights reserved.</p>
+          <nav className="flex flex-wrap justify-center gap-x-5 gap-y-1">
             <a href="/terms-of-service" className="hover:text-yellow-400 transition-colors">Terms of Service</a>
             <a href="/refund-policy" className="hover:text-yellow-400 transition-colors">Refund Policy</a>
             <a href="/privacy-policy" className="hover:text-yellow-400 transition-colors">Privacy Policy</a>
-            <a href="mailto:maho@malexcoaching.com" className="hover:text-yellow-400 transition-colors">Contact Us</a>
+            <a href="mailto:maho@malexcoaching.com" className="inline-flex items-center gap-1 hover:text-yellow-400 transition-colors">
+              <Mail className="w-3.5 h-3.5" /> maho@malexcoaching.com
+            </a>
           </nav>
-          <p>© 2026 Malex Coaching. All rights reserved.</p>
         </div>
       </footer>
     </div>
