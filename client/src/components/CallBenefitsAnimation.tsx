@@ -10,28 +10,28 @@ export function CallBenefitsAnimation() {
       description: "A clear breakdown of your current problems, what is holding you back, and exactly how we are going to solve them.",
       icon: Target,
       color: "from-yellow-400 to-yellow-600",
-      image: "/manus-storage/what-you-get-1_0692d769.jpg",
+      image: "/media/wyg-breakdown.jpg",
     },
     {
       title: "Full Walkthrough Of Our System",
-      description: "A walkthrough of the personal system we have used to help 100+ clients build muscle, lose fat, and stay consistent.",
+      description: "A walkthrough of the personal system we have used to help 200+ clients build muscle, lose fat, and stay consistent.",
       icon: Zap,
       color: "from-yellow-400 to-yellow-600",
-      image: "/manus-storage/what-you-get-2_3cb6bd86.jpg",
+      image: "/media/wyg-walkthrough.jpg",
     },
     {
       title: "Personalized Roadmap",
       description: "A custom roadmap showing you exactly how to achieve your fitness goal using a system that takes less than 3 hours per week.",
       icon: Award,
       color: "from-yellow-400 to-yellow-600",
-      image: "/manus-storage/what-you-get-3_75ea3b07.jpg",
+      image: "/media/wyg-roadmap.jpg",
     },
     {
       title: "Clear Next Steps",
       description: "A simple action plan so you know exactly what to do after the call.",
       icon: Check,
       color: "from-yellow-400 to-yellow-600",
-      image: "/manus-storage/what-you-get-4_5054644f.jpg",
+      image: "/media/wyg-nextsteps.jpg",
     },
   ];
 
@@ -115,7 +115,7 @@ export function CallBenefitsAnimation() {
               <div className="flex-1 flex flex-col justify-center">
                 <div className="space-y-6 animate-fade-in">
                   {/* Image Display */}
-                  <div className="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-yellow-500/30 shadow-lg shadow-yellow-500/20">
+                  <div className="w-full aspect-[16/10] rounded-lg overflow-hidden border border-yellow-500/30 shadow-lg shadow-yellow-500/20">
                     <img 
                       src={steps[activeStep].image} 
                       alt={steps[activeStep].title}
