@@ -4,6 +4,8 @@ import { Check, Users, Zap, Target, Award } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Header } from "@/components/Header";
 import { CallBenefitsAnimation } from "@/components/CallBenefitsAnimation";
+import { ClientResults } from "@/components/ClientResults";
+import { Coaches } from "@/components/Coaches";
 
 /**
  * ESL (Entry Sales Letter) - Main Landing Page
@@ -72,7 +74,7 @@ export default function ESL() {
         <div className="relative z-10 max-w-5xl mx-auto">
           {/* Logo */}
           <div className="flex justify-center mb-12" style={{ transform: `translateY(${scrollY * 0.1}px)` }}>
-            <img src="/manus-storage/maho-logo_64d5e184.png" alt="Malex Coaching" className="w-20 h-20 rounded-full shadow-lg shadow-yellow-500/30" />
+            <img src="/media/malex-logo-ring.jpg" alt="Malex Coaching" className="w-56 h-56 md:w-72 md:h-72 rounded-3xl object-cover shadow-2xl shadow-yellow-500/20" />
           </div>
 
           {/* Main headline with gold accent and underline */}
@@ -202,6 +204,9 @@ export default function ESL() {
             {/* Glow effect */}
             <span className="absolute inset-0 rounded-xl shadow-lg shadow-yellow-400/0 group-hover:shadow-yellow-400/50 transition-shadow duration-300"></span>
           </button>
+
+          {/* Coaches */}
+          <Coaches />
         </div>
       </section>
 
@@ -218,21 +223,8 @@ export default function ESL() {
             Real clients. Real transformations. And so many more.
           </p>
 
-          {/* Transformation Images Grid */}
-          <div className="grid grid-cols-1 gap-8 mb-8">
-            {/* Transformation Image 2 - Horizontal */}
-            <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 hover:shadow-lg hover:shadow-yellow-500/30 transition-all duration-300 stagger-2 group cursor-pointer overflow-hidden rounded-lg">
-              <img src="/manus-storage/transformation-2_cb935d11.jpg" alt="Client Transformation 2" className="w-full h-auto object-contain" />
-            </div>
-          </div>
-
-          {/* Horizontal Image */}
-          <div className="grid grid-cols-1 gap-8">
-            {/* Transformation Image 3 - Horizontal (Large) */}
-            <div className="glass-card p-1 border-yellow-500/30 hover:border-yellow-500/50 hover:shadow-lg hover:shadow-yellow-500/30 transition-all duration-300 stagger-3 group cursor-pointer overflow-hidden rounded-lg">
-              <img src="/manus-storage/transformation-3_f6622678.jpg" alt="Client Transformation 3" className="w-full h-auto object-contain" />
-            </div>
-          </div>
+          {/* Client results (from Miro) */}
+          <ClientResults />
         </div>
       </section>
 
