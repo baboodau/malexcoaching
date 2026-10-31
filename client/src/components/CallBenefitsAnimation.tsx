@@ -31,7 +31,7 @@ export function CallBenefitsAnimation() {
       description: "A simple action plan so you know exactly what to do after the call.",
       icon: Check,
       color: "from-yellow-400 to-yellow-600",
-      image: "/media/wyg-nextsteps.jpg?v=3",
+      image: "/media/wyg-system.jpg",
     },
   ];
 
@@ -45,26 +45,8 @@ export function CallBenefitsAnimation() {
 
   return (
     <div className="w-full max-w-5xl mx-auto">
-      {/* Software Interface Container */}
-      <div className="glass-card p-1 border-yellow-500/30 overflow-hidden grid-bg">
-        <div className="bg-gradient-to-br from-[#17120a] via-[#0b0906] to-[#050403] rounded-lg overflow-hidden relative">
-          {/* Grid background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#17120a] via-[#0b0906] to-[#050403]" style={{
-            backgroundImage: 'linear-gradient(rgba(250, 204, 21, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(250, 204, 21, 0.03) 1px, transparent 1px)',
-            backgroundSize: '50px 50px',
-            pointerEvents: 'none'
-          }}></div>
-          
-          {/* Window Header */}
-          <div className="relative z-10 bg-gradient-to-r from-yellow-500/20 to-yellow-600/10 border-b border-yellow-500/20 px-6 py-4 flex items-center gap-3">
-            <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500/60"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500/60"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500/60"></div>
-            </div>
-            <span className="text-gray-400 text-sm font-medium ml-4">call_benefits.exe</span>
-          </div>
-
+      <div className="rounded-3xl p-[1px] bg-gradient-to-b from-yellow-400/60 via-yellow-600/25 to-yellow-900/10 shadow-xl shadow-yellow-900/20">
+        <div className="rounded-3xl overflow-hidden relative bg-gradient-to-b from-[#17120a] to-[#0a0806]">
           {/* Content Area */}
           <div className="relative z-10 p-8 md:p-12 min-h-[500px]">
             <div className="flex flex-col lg:flex-row gap-8">
@@ -78,7 +60,7 @@ export function CallBenefitsAnimation() {
                     <button
                       key={index}
                       onClick={() => setActiveStep(index)}
-                      className={`w-full text-left p-4 rounded-lg transition-all duration-300 flex items-center gap-3 group ${
+                      className={`w-full text-left p-4 rounded-2xl transition-all duration-300 flex items-center gap-3 group ${
                         isActive
                           ? "bg-gradient-to-r from-yellow-500/30 to-yellow-600/20 border border-yellow-500/50 shadow-lg shadow-yellow-500/20"
                           : "bg-white/[0.03] border border-yellow-500/15 hover:bg-yellow-500/[0.06] hover:border-yellow-500/30"
@@ -115,12 +97,14 @@ export function CallBenefitsAnimation() {
               <div className="flex-1 flex flex-col justify-center">
                 <div className="space-y-6 animate-fade-in">
                   {/* Image Display */}
-                  <div className="w-full aspect-[16/10] rounded-lg overflow-hidden border border-yellow-500/30 shadow-lg shadow-yellow-500/20">
+                  <div className="w-full rounded-2xl p-[1px] bg-gradient-to-b from-yellow-400/60 via-yellow-600/25 to-yellow-900/10 shadow-lg shadow-yellow-900/30">
+                    <div className="rounded-2xl overflow-hidden bg-[#0a0806] aspect-[16/10]">
                     <img 
                       src={steps[activeStep].image} 
                       alt={steps[activeStep].title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
+                    </div>
                   </div>
 
                   {/* Text Content */}
@@ -157,11 +141,6 @@ export function CallBenefitsAnimation() {
             </div>
           </div>
 
-          {/* Footer */}
-          <div className="relative z-10 bg-black/50 border-t border-yellow-500/10 px-6 py-3 flex items-center justify-between text-xs text-gray-500">
-            <span>Ready to get started?</span>
-            <span className="text-yellow-400/60">→ Book your call below</span>
-          </div>
         </div>
       </div>
 
