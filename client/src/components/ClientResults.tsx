@@ -50,6 +50,26 @@ const RESULTS: Result[] = [
   { name: "Carlos", result: "2 months +7kg/15lbs + abs", type: "muscle", img: "/media/res-c37.jpg" },
   { name: "Ryan", result: "4 months +14kg/31lbs", type: "muscle", img: "/media/res-c38.jpg" },
   { name: "Ciro", result: "3 months +9kg/19lbs + abs", type: "muscle", img: "/media/res-c39.jpg" },
+  { name: "Malex Client", result: "2 months +5kg/11lbs muscle", type: "muscle", img: "/media/res-n01.jpg" },
+  { name: "Elagili", result: "1 month +3kg/7lbs muscle", type: "muscle", img: "/media/res-n02.jpg" },
+  { name: "Malex Client", result: "Back: no muscle to V-taper", type: "muscle", img: "/media/res-n03.jpg" },
+  { name: "Hasan", result: "3 months -15kg/33lbs", type: "fat", img: "/media/res-n04.jpg" },
+  { name: "Taffiq", result: "1 month -4kg/10lbs", type: "fat", img: "/media/res-n05.jpg" },
+  { name: "Malex Client", result: "Stronger + leaner", type: "muscle", img: "/media/res-n06.jpg" },
+  { name: "Rock", result: "Chest transformation", type: "muscle", img: "/media/res-n07.jpg" },
+  { name: "Malex Client", result: "Underweight to 6 pack", type: "muscle", img: "/media/res-n08.jpg" },
+  { name: "Malex Client", result: "-10lbs + abs forming", type: "fat", img: "/media/res-n09.jpg" },
+  { name: "Malex Client", result: "Lost the belly, visible abs", type: "fat", img: "/media/res-n10.jpg" },
+  { name: "Angelo", result: "Skinny fat to 6 pack", type: "muscle", img: "/media/res-n11.jpg" },
+  { name: "Malex Client", result: "4 months, same mirror", type: "muscle", img: "/media/res-n12.jpg" },
+  { name: "Malex Client", result: "12 weeks leaner", type: "fat", img: "/media/res-n13.jpg" },
+  { name: "Malex Client", result: "6 weeks, abs secured", type: "muscle", img: "/media/res-n14.jpg" },
+  { name: "Malex Client", result: "Stuck & plateaued to muscular", type: "muscle", img: "/media/res-n15.jpg" },
+  { name: "Malex Client", result: "2 months arm growth", type: "muscle", img: "/media/res-n16.jpg" },
+  { name: "Malex Client", result: "Visible abs", type: "muscle", img: "/media/res-n17.jpg" },
+  { name: "Malex Client", result: "Abs in a few weeks", type: "muscle", img: "/media/res-n18.jpg" },
+  { name: "Richie", result: "Lost the belly", type: "fat", img: "/media/res-n19.jpg" },
+  { name: "Malex Client", result: "9 weeks, abs", type: "muscle", img: "/media/res-n20.jpg" },
 ];
 
 const FILTERS = [
@@ -95,19 +115,19 @@ export function ClientResults({ initial = 12, heading = true }: Props) {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
         {visible.map((r) => (
           <figure
             key={r.name + r.result}
-            className="group rounded-3xl p-[1px] bg-gradient-to-b from-yellow-400/60 via-yellow-600/25 to-yellow-900/10 shadow-lg shadow-yellow-900/20 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-yellow-500/25"
+            className="group mb-6 break-inside-avoid rounded-3xl p-[1px] bg-gradient-to-b from-yellow-400/60 via-yellow-600/25 to-yellow-900/10 shadow-lg shadow-yellow-900/20 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-yellow-500/25"
           >
             <div className="rounded-3xl overflow-hidden bg-gradient-to-b from-[#17120a] to-[#0a0806]">
-              <div className="aspect-[5/4] overflow-hidden">
+              <div className="overflow-hidden">
                 <img
                   src={r.img}
                   alt={`${r.name} before and after`}
                   loading="lazy"
-                  className="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                  className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                 />
               </div>
               <figcaption className="px-4 pt-3 pb-5 text-center">
