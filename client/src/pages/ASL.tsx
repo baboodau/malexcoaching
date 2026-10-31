@@ -93,8 +93,7 @@ const caseStudies: { id: string; title: string }[] = [
   { id: "zYpu4rwTvac", title: "How our client went from skinny to muscular" },
   { id: "ipEZpc9lUWI", title: "Don’t watch this if you don’t want to be skinny anymore" },
   { id: "kBrZj-LJHy8", title: "How to regain your confidence as a skinny guy" },
-  { id: "F6k0vK3xxGc", title: "How our client got big biceps and lost fat" },
-  { id: "zTcWwRDwdOc", title: "Client Success Story" }
+  { id: "F6k0vK3xxGc", title: "How our client got big biceps and lost fat" }
 ];
 
 const NAV = [
@@ -153,7 +152,7 @@ export default function ASL() {
       <header className="sticky top-0 z-50 bg-black/85 backdrop-blur-xl border-b border-yellow-500/15">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
           <a href="/" className="flex items-center gap-3 shrink-0">
-            <img src="/manus-storage/maho-logo_64d5e184.png" alt="Malex Coaching" className="w-10 h-10 rounded-full" />
+            <img src="/media/logo-nav.jpg" alt="Malex Coaching" className="w-10 h-10 rounded-full ring-1 ring-yellow-500/50 shadow-md shadow-yellow-500/30" />
             <span className="font-bold leading-tight text-sm">
               Malex <span className="text-yellow-400">Coaching</span>
             </span>
@@ -277,7 +276,7 @@ export default function ASL() {
       {/* RESULTS */}
       <section id="results" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
-          <ClientResults initial={9} />
+          <ClientResults initial={12} />
         </div>
       </section>
 
@@ -322,7 +321,7 @@ export default function ASL() {
                 onClick={() => setShowAllCases(!showAllCases)}
                 className="px-8 py-3 rounded-xl border border-yellow-400/50 text-yellow-400 font-semibold hover:bg-yellow-400/10 transition-colors"
               >
-                {showAllCases ? "Show less" : `See all ${caseStudies.length} case studies`}
+                {showAllCases ? "Show less" : `Show more (${caseStudies.length - 6})`}
               </button>
             </div>
           )}
