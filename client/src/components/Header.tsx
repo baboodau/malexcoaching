@@ -16,7 +16,7 @@ export function Header({ showNav = true }: HeaderProps) {
           className="flex items-center gap-3 hover:opacity-90 transition-opacity group"
         >
           <img 
-            src="/manus-storage/maho-logo_64d5e184.png" 
+            src="/media/logo-nav.jpg" 
             alt="Malex Coaching" 
             className="w-12 h-12 rounded-full group-hover:shadow-lg group-hover:shadow-yellow-500/40 transition-all duration-300 translate-x-1" 
           />

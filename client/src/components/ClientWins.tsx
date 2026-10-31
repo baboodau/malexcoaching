@@ -140,7 +140,6 @@ const WINS: [string, "fat" | "muscle" | "msg"][] = [
   ["w138", "msg"],
   ["w112", "fat"],
   ["w139", "msg"],
-  ["w113", "fat"],
   ["w140", "msg"],
   ["w141", "msg"],
   ["w142", "msg"],
@@ -231,7 +230,7 @@ export function ClientWins({ initial = 16 }: { initial?: number }) {
             onClick={() => setCount((c) => c + 16)}
             className="px-8 py-3 rounded-full border border-yellow-500/40 text-yellow-300 font-semibold hover:bg-yellow-500/10 transition-colors duration-300"
           >
-            Show more wins ({list.length - count} more)
+            Show more ({list.length - count})
           </button>
         </div>
       )}

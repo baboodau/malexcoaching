@@ -21,7 +21,6 @@ const TESTIMONIALS = [
   { id: "t16", name: "Usman", result: "Back transformation" },
   { id: "t17", name: "Mark", result: "65 years old, no more joint pain" },
   { id: "t18", name: "Sam", result: "19% to 12% body fat" },
-  { id: "t19", name: "Eric", result: "Built muscle, got 6 pack abs" },
   { id: "t20", name: "Zach", result: "V-taper in 2-3 months" },
   { id: "t21", name: "Paul", result: "Lost the beer belly" },
   { id: "t22", name: "Lamar", result: "Six pack before summer" },
@@ -83,7 +82,7 @@ export function VideoTestimonials({ initial = 8 }: { initial?: number }) {
             onClick={() => setCount((c) => c + 8)}
             className="px-8 py-3 rounded-full border border-yellow-500/40 text-yellow-300 font-semibold hover:bg-yellow-500/10 transition-colors duration-300"
           >
-            More testimonials ({TESTIMONIALS.length - count} more)
+            Show more ({TESTIMONIALS.length - count})
           </button>
         </div>
       )}

@@ -10,28 +10,28 @@ export function CallBenefitsAnimation() {
       description: "A clear breakdown of your current problems, what is holding you back, and exactly how we are going to solve them.",
       icon: Target,
       color: "from-yellow-400 to-yellow-600",
-      image: "/media/wyg-breakdown.jpg",
+      image: "/media/wyg-breakdown.jpg?v=3",
     },
     {
       title: "Full Walkthrough Of Our System",
       description: "A walkthrough of the personal system we have used to help 200+ clients build muscle, lose fat, and stay consistent.",
       icon: Zap,
       color: "from-yellow-400 to-yellow-600",
-      image: "/media/wyg-walkthrough.jpg",
+      image: "/media/wyg-walkthrough.jpg?v=3",
     },
     {
       title: "Personalized Roadmap",
       description: "A custom roadmap showing you exactly how to achieve your fitness goal using a system that takes less than 3 hours per week.",
       icon: Award,
       color: "from-yellow-400 to-yellow-600",
-      image: "/media/wyg-roadmap.jpg",
+      image: "/media/wyg-roadmap.jpg?v=3",
     },
     {
       title: "Clear Next Steps",
       description: "A simple action plan so you know exactly what to do after the call.",
       icon: Check,
       color: "from-yellow-400 to-yellow-600",
-      image: "/media/wyg-nextsteps.jpg",
+      image: "/media/wyg-nextsteps.jpg?v=3",
     },
   ];
 
@@ -47,9 +47,9 @@ export function CallBenefitsAnimation() {
     <div className="w-full max-w-5xl mx-auto">
       {/* Software Interface Container */}
       <div className="glass-card p-1 border-yellow-500/30 overflow-hidden grid-bg">
-        <div className="bg-gradient-to-br from-gray-900 to-gray-950 rounded-lg overflow-hidden relative">
+        <div className="bg-gradient-to-br from-[#17120a] via-[#0b0906] to-[#050403] rounded-lg overflow-hidden relative">
           {/* Grid background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-950" style={{
+          <div className="absolute inset-0 bg-gradient-to-br from-[#17120a] via-[#0b0906] to-[#050403]" style={{
             backgroundImage: 'linear-gradient(rgba(250, 204, 21, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(250, 204, 21, 0.03) 1px, transparent 1px)',
             backgroundSize: '50px 50px',
             pointerEvents: 'none'
@@ -81,17 +81,17 @@ export function CallBenefitsAnimation() {
                       className={`w-full text-left p-4 rounded-lg transition-all duration-300 flex items-center gap-3 group ${
                         isActive
                           ? "bg-gradient-to-r from-yellow-500/30 to-yellow-600/20 border border-yellow-500/50 shadow-lg shadow-yellow-500/20"
-                          : "bg-gray-800/40 border border-gray-700/50 hover:bg-gray-800/60"
+                          : "bg-white/[0.03] border border-yellow-500/15 hover:bg-yellow-500/[0.06] hover:border-yellow-500/30"
                       }`}
                     >
                       <div
                         className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-all ${
                           isActive
                             ? "bg-gradient-to-br from-yellow-400 to-yellow-600 shadow-lg shadow-yellow-600/50"
-                            : "bg-gray-700 group-hover:bg-gray-600"
+                            : "bg-[#1f1a10] border border-yellow-500/20 group-hover:bg-[#2a2213]"
                         }`}
                       >
-                        <Icon className={`w-5 h-5 ${isActive ? "text-black" : "text-gray-300"}`} />
+                        <Icon className={`w-5 h-5 ${isActive ? "text-black" : "text-yellow-400/80"}`} />
                       </div>
                       <div className="min-w-0 flex-1">
                         <p
@@ -145,7 +145,7 @@ export function CallBenefitsAnimation() {
                       <span>Progress</span>
                       <span>{activeStep + 1} of {steps.length}</span>
                     </div>
-                    <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                    <div className="h-2 bg-yellow-900/30 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full transition-all duration-500"
                         style={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
@@ -158,7 +158,7 @@ export function CallBenefitsAnimation() {
           </div>
 
           {/* Footer */}
-          <div className="relative z-10 bg-gray-950/50 border-t border-yellow-500/10 px-6 py-3 flex items-center justify-between text-xs text-gray-500">
+          <div className="relative z-10 bg-black/50 border-t border-yellow-500/10 px-6 py-3 flex items-center justify-between text-xs text-gray-500">
             <span>Ready to get started?</span>
             <span className="text-yellow-400/60">→ Book your call below</span>
           </div>
@@ -174,7 +174,7 @@ export function CallBenefitsAnimation() {
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               index === activeStep
                 ? "bg-gradient-to-r from-yellow-400 to-yellow-600 w-8"
-                : "bg-gray-700 hover:bg-gray-600"
+                : "bg-yellow-900/40 hover:bg-yellow-700/50"
             }`}
           ></button>
         ))}
