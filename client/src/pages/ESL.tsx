@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight, Check, Clock, Users, Video, ShieldCheck, ChevronDown, Mail } from "lucide-react";
 import { CallBenefitsAnimation } from "@/components/CallBenefitsAnimation";
 import { ClientResults } from "@/components/ClientResults";
+import { ClientWins } from "@/components/ClientWins";
 import { Coaches } from "@/components/Coaches";
 
 /**
@@ -235,6 +236,13 @@ export default function ESL() {
           <div className="flex justify-center mt-12">
             <BookButton />
           </div>
+        </div>
+      </section>
+
+      {/* CLIENT WINS */}
+      <section id="wins" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
+        <div className="max-w-6xl mx-auto">
+          <ClientWins initial={16} />
         </div>
       </section>
 
