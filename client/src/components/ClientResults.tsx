@@ -84,7 +84,8 @@ export function ClientResults({ initial = 12, heading = true }: Props) {
   const [filter, setFilter] = useState<"all" | "fat" | "muscle">("all");
   const [showAll, setShowAll] = useState(false);
   const list = RESULTS.filter((r) => filter === "all" || r.type === filter);
-  const visible = showAll ? list : list.slice(0, initial);
+  const base = (list.length - initial) % 2 ? initial - 1 : initial;
+  const visible = showAll ? list : list.slice(0, base);
 
   return (
     <div className="w-full">
@@ -141,7 +142,7 @@ export function ClientResults({ initial = 12, heading = true }: Props) {
         ))}
       </div>
 
-      {list.length > initial && (
+      {list.length > base && (
         <div className="flex justify-center mt-10">
           <button
             onClick={() => setShowAll(!showAll)}

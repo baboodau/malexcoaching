@@ -140,6 +140,7 @@ const WINS: [string, "fat" | "muscle" | "msg"][] = [
   ["w138", "msg"],
   ["w112", "fat"],
   ["w139", "msg"],
+  ["w113", "fat"],
   ["w140", "msg"],
   ["w141", "msg"],
   ["w142", "msg"],
@@ -173,9 +174,11 @@ type Key = (typeof TABS)[number]["key"];
 
 export function ClientWins({ initial = 16 }: { initial?: number }) {
   const [tab, setTab] = useState<Key>("all");
-  const [count, setCount] = useState(initial);
+  const [extra, setExtra] = useState(0);
   const [open, setOpen] = useState<string | null>(null);
   const list = WINS.filter(([, t]) => tab === "all" || t === tab);
+  const base = (list.length - initial) % 2 ? initial - 1 : initial;
+  const count = Math.min(list.length, base + extra);
   const visible = list.slice(0, count);
 
   return (
@@ -192,7 +195,7 @@ export function ClientWins({ initial = 16 }: { initial?: number }) {
             key={t.key}
             onClick={() => {
               setTab(t.key);
-              setCount(initial);
+              setExtra(0);
             }}
             className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-300 ${
               tab === t.key
@@ -227,7 +230,7 @@ export function ClientWins({ initial = 16 }: { initial?: number }) {
       {count < list.length && (
         <div className="flex justify-center mt-10">
           <button
-            onClick={() => setCount((c) => c + 16)}
+            onClick={() => setExtra((e) => e + 16)}
             className="px-8 py-3 rounded-full border border-yellow-500/40 text-yellow-300 font-semibold hover:bg-yellow-500/10 transition-colors duration-300"
           >
             Show more ({list.length - count})
