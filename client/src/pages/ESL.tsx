@@ -60,9 +60,9 @@ const METHOD = [
 
 const FAQS: { q: string; a: string; v?: string }[] = [
   { q: "Is the strategy call free?", a: "Yes. It's a free 30-minute call where we look at where you are, what's held you back, and the exact plan to reach your goal." },
+  { q: "Do I need gym experience?", a: "No. Your plan is built for your level and your schedule, and every exercise comes with video guidance." },
   { q: "How fast will I see results?", a: "Sash explains realistic timelines for seeing your transformation.", v: "HR6PKD-JDWs" },
   { q: "Will I have time to do the program?", a: "Around 3 hours of training a week, built around your schedule. Sash explains how it fits a busy life.", v: "58MwRglr8Gg" },
-  { q: "Do I need gym experience?", a: "No. Your plan is built for your level and your schedule, and every exercise comes with video guidance." },
   { q: "Will I get personalized support?", a: "How we coach you 1-on-1, with weekly check-ins and direct messaging.", v: "xA0JvOB7nQ0" },
   { q: "What if I don't get the same results as your clients?", a: "Realistic expectations and how we adjust the plan to you.", v: "Sr2tq3RBwl0" },
   { q: "What if I'm not satisfied with the program?", a: "We sign a results agreement with every client. Sash walks through the guarantee.", v: "WRcpxQop12Q" },
