@@ -12,6 +12,10 @@
   --color-amber-500: #c08a2c;
 }
 
+@layer base {
+  :root { color-scheme: dark; }
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
