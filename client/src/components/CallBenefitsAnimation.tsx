@@ -10,28 +10,28 @@ export function CallBenefitsAnimation() {
       description: "A clear breakdown of your current problems, what is holding you back, and exactly how we are going to solve them.",
       icon: Target,
       color: "from-yellow-400 to-yellow-600",
-      image: "/media/wyg-breakdown.jpg?v=3",
+      image: "/manus-storage/what-you-get-1_0692d769.jpg",
     },
     {
       title: "Full Walkthrough Of Our System",
       description: "A walkthrough of the personal system we have used to help 200+ clients build muscle, lose fat, and stay consistent.",
       icon: Zap,
       color: "from-yellow-400 to-yellow-600",
-      image: "/media/wyg-walkthrough.jpg?v=3",
+      image: "/manus-storage/what-you-get-2_3cb6bd86.jpg",
     },
     {
       title: "Personalized Roadmap",
       description: "A custom roadmap showing you exactly how to achieve your fitness goal using a system that takes less than 3 hours per week.",
       icon: Award,
       color: "from-yellow-400 to-yellow-600",
-      image: "/media/wyg-roadmap.jpg?v=3",
+      image: "/manus-storage/what-you-get-3_75ea3b07.jpg",
     },
     {
       title: "Clear Next Steps",
       description: "A simple action plan so you know exactly what to do after the call.",
       icon: Check,
       color: "from-yellow-400 to-yellow-600",
-      image: "/media/wyg-system.jpg",
+      image: "/manus-storage/what-you-get-4_5054644f.jpg",
     },
   ];
 
