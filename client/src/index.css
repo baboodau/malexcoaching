@@ -1,6 +1,17 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@theme {
+  --color-yellow-200: #f5e1a4;
+  --color-yellow-300: #ebc563;
+  --color-yellow-400: #ddb04a;
+  --color-yellow-500: #c99a36;
+  --color-yellow-600: #a97e25;
+  --color-yellow-700: #8a661c;
+  --color-amber-400: #d9a441;
+  --color-amber-500: #c08a2c;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
