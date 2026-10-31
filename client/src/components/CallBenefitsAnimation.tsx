@@ -11,6 +11,7 @@ export function CallBenefitsAnimation() {
       icon: Target,
       color: "from-yellow-400 to-yellow-600",
       image: "/media/malex-call/wyg-call-1.jpg",
+      zoom: 1.22,
     },
     {
       title: "Full Walkthrough Of Our System",
@@ -103,6 +104,7 @@ export function CallBenefitsAnimation() {
                       src={steps[activeStep].image} 
                       alt={steps[activeStep].title}
                       className="w-full h-full object-cover"
+                      style={{ transform: `scale(${(steps[activeStep] as { zoom?: number }).zoom ?? 1})` }}
                     />
                     </div>
                   </div>
