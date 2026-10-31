@@ -270,7 +270,7 @@ export default function ASL() {
           </div>
           <div className="space-y-4">
             <img src="/media/wyg-walkthrough.jpg" alt="Malex client dashboard" loading="lazy" className="w-full rounded-2xl border border-yellow-500/30" />
-            <img src="/media/wyg-nextsteps.jpg" alt="The Malex coaching system" loading="lazy" className="w-full rounded-2xl border border-yellow-500/30" />
+            <img src="/media/wyg-system.jpg" alt="The Malex coaching system" loading="lazy" className="w-full rounded-2xl border border-yellow-500/30" />
           </div>
         </div>
       </section>
