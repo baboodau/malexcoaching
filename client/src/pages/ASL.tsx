@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Check, ChevronDown, Play, Clock, Users, ShieldCheck, Video, CalendarCheck, Mail } from "lucide-react";
 import { ClientResults } from "@/components/ClientResults";
 import { ClientWins } from "@/components/ClientWins";
+import { VideoTestimonials } from "@/components/VideoTestimonials";
 import { Coaches } from "@/components/Coaches";
 
 /**
@@ -284,6 +285,13 @@ export default function ASL() {
       <section id="wins" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
           <ClientWins initial={12} />
+        </div>
+      </section>
+
+      {/* VIDEO TESTIMONIALS */}
+      <section id="testimonials" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
+        <div className="max-w-6xl mx-auto">
+          <VideoTestimonials initial={8} />
         </div>
       </section>
 

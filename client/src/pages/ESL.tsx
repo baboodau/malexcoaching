@@ -3,6 +3,7 @@ import { ArrowRight, Check, Clock, Users, Video, ShieldCheck, ChevronDown, Mail 
 import { CallBenefitsAnimation } from "@/components/CallBenefitsAnimation";
 import { ClientResults } from "@/components/ClientResults";
 import { ClientWins } from "@/components/ClientWins";
+import { VideoTestimonials } from "@/components/VideoTestimonials";
 import { Coaches } from "@/components/Coaches";
 
 /**
@@ -57,11 +58,16 @@ const METHOD = [
   { n: "03", title: "Keep it", body: "We teach you the habits so you can hold your new physique for life — not just for 12 weeks." },
 ];
 
-const FAQS = [
+const FAQS: { q: string; a: string; v?: string }[] = [
   { q: "Is the strategy call free?", a: "Yes. It's a free 30-minute call where we look at where you are, what's held you back, and the exact plan to reach your goal." },
+  { q: "How fast will I see results?", a: "Sash explains realistic timelines for seeing your transformation.", v: "HR6PKD-JDWs" },
+  { q: "Will I have time to do the program?", a: "Around 3 hours of training a week, built around your schedule. Sash explains how it fits a busy life.", v: "58MwRglr8Gg" },
   { q: "Do I need gym experience?", a: "No. Your plan is built for your level and your schedule, and every exercise comes with video guidance." },
-  { q: "How much time does it take?", a: "Around 3 hours of training a week. Nutrition and habits are built around the life you already have." },
-  { q: "What if I don't get results?", a: "We sign a results agreement with every client. If you complete 90% of the program and see no results, you get a full refund." },
+  { q: "Will I get personalized support?", a: "How we coach you 1-on-1, with weekly check-ins and direct messaging.", v: "xA0JvOB7nQ0" },
+  { q: "What if I don't get the same results as your clients?", a: "Realistic expectations and how we adjust the plan to you.", v: "Sr2tq3RBwl0" },
+  { q: "What if I'm not satisfied with the program?", a: "We sign a results agreement with every client. Sash walks through the guarantee.", v: "WRcpxQop12Q" },
+  { q: "What if I'm already with another coach?", a: "How switching to Malex works if you already have a coach.", v: "gkP-7sX7KXk" },
+  { q: "Will I be able to afford it?", a: "How to think about the investment in your transformation.", v: "iZw0btmKW3Y" },
 ];
 
 function SectionHead({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string }) {
@@ -246,6 +252,13 @@ export default function ESL() {
         </div>
       </section>
 
+      {/* VIDEO TESTIMONIALS */}
+      <section id="testimonials" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
+        <div className="max-w-6xl mx-auto">
+          <VideoTestimonials initial={8} />
+        </div>
+      </section>
+
       {/* COACHES */}
       <section id="coaches" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15 text-center">
         <div className="max-w-6xl mx-auto">
@@ -303,10 +316,29 @@ export default function ESL() {
                     onClick={() => setOpenFaq(open ? null : i)}
                     className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-gray-900/60 transition-colors"
                   >
-                    <span className="font-bold text-white">{f.q}</span>
+                    <span className="font-bold text-white flex items-center gap-2">
+                      {f.v && <span className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full bg-gradient-to-r from-yellow-300 to-amber-500 text-black">Video</span>}
+                      {f.q}
+                    </span>
                     <ChevronDown className={`w-5 h-5 text-yellow-400 shrink-0 transition-transform ${open ? "rotate-180" : ""}`} />
                   </button>
-                  {open && <p className="px-5 pb-5 text-gray-400 leading-relaxed">{f.a}</p>}
+                  {open && (
+                    <div className="px-5 pb-5">
+                      <p className="text-gray-400 leading-relaxed">{f.a}</p>
+                      {f.v && (
+                        <div className="mt-4 aspect-video rounded-xl overflow-hidden bg-black border border-yellow-500/20">
+                          <iframe
+                            src={`https://www.youtube.com/embed/${f.v}?rel=0`}
+                            title={f.q}
+                            loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            className="w-full h-full"
+                          ></iframe>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               );
             })}
