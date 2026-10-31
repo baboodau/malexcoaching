@@ -10,15 +10,14 @@ export function CallBenefitsAnimation() {
       description: "A clear breakdown of your current problems, what is holding you back, and exactly how we are going to solve them.",
       icon: Target,
       color: "from-yellow-400 to-yellow-600",
-      image: "/media/malex-call/wyg-call-1.jpg",
-      zoom: 1.22,
+      image: "/media/malex-call/malex-call-hq/wyg-call-1.jpg",
     },
     {
       title: "Full Walkthrough Of Our System",
       description: "A walkthrough of the personal system we have used to help 200+ clients build muscle, lose fat, and stay consistent.",
       icon: Zap,
       color: "from-yellow-400 to-yellow-600",
-      image: "/media/malex-call/wyg-call-2.jpg",
+      image: "/media/malex-call/malex-call-hq/wyg-call-2.jpg",
     },
     {
       title: "Personalized Roadmap",
