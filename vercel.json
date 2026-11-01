@@ -3,5 +3,42 @@
   "framework": "vite",
   "buildCommand": "vite build",
   "outputDirectory": "dist/public",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/malex-free-workout-plan",
+      "destination": "/Malex-Free-Workout-Plans_1.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/malex-free-workout-plans",
+      "destination": "/Malex-Free-Workout-Plans_1.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/free-workout-plan",
+      "destination": "/Malex-Free-Workout-Plans_1.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/free-workout-plans",
+      "destination": "/Malex-Free-Workout-Plans_1.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/workout-plan",
+      "destination": "/Malex-Free-Workout-Plans_1.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/Malex-Free-Workout-Plans.pdf",
+      "destination": "/Malex-Free-Workout-Plans_1.pdf",
+      "permanent": false
+    }
+  ]
 }
