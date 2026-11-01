@@ -17,7 +17,8 @@ export function CallBenefitsAnimation() {
       description: "A walkthrough of the personal system we have used to help 200+ clients build muscle, lose fat, and stay consistent.",
       icon: Zap,
       color: "from-yellow-400 to-yellow-600",
-      image: "/media/malex-call/malex-call-hq/wyg-call-2.jpg",
+      image: "/media/malex-call/Gemini_Generated_Image_pshkwjpshkwjpshk.jpg",
+      pos: "50% 46%",
     },
     {
       title: "Personalized Roadmap",
@@ -103,7 +104,7 @@ export function CallBenefitsAnimation() {
                       src={steps[activeStep].image} 
                       alt={steps[activeStep].title}
                       className="w-full h-full object-cover"
-                      style={{ transform: `scale(${(steps[activeStep] as { zoom?: number }).zoom ?? 1})` }}
+                      style={{ transform: `scale(${(steps[activeStep] as { zoom?: number }).zoom ?? 1})`, objectPosition: (steps[activeStep] as { pos?: string }).pos ?? "50% 50%" }}
                     />
                     </div>
                   </div>
