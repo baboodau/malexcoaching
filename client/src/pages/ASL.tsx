@@ -15,10 +15,20 @@ interface ObjectionVideo {
   id: number;
   title: string;
   description: string;
-  videoUrl: string;
+  videoUrl?: string;
 }
 
 const objectionVideos: ObjectionVideo[] = [
+  {
+    id: 101,
+    title: "Is the strategy call free?",
+    description: "Yes. It's a free 30-minute call where we look at where you are, what's held you back, and the exact plan to reach your goal.",
+  },
+  {
+    id: 102,
+    title: "Do I need gym experience?",
+    description: "No. Your plan is built for your level and your schedule, and every exercise comes with video guidance.",
+  },
   {
     id: 1,
     title: "How fast will I see results?",
@@ -355,21 +365,25 @@ export default function ASL() {
                   >
                     <div>
                       <p className="font-bold text-white">{v.title}</p>
-                      <p className="text-sm text-gray-400 mt-1">{v.description}</p>
+                      {v.videoUrl && <p className="text-sm text-gray-400 mt-1">{v.description}</p>}
                     </div>
                     <ChevronDown className={`w-5 h-5 text-yellow-400 shrink-0 transition-transform ${open ? "rotate-180" : ""}`} />
                   </button>
                   {open && (
                     <div className="px-5 pb-5">
+                      {!v.videoUrl ? (
+                        <p className="text-gray-300 leading-relaxed">{v.description}</p>
+                      ) : (
                       <div className="aspect-video rounded-xl overflow-hidden bg-black">
                         <iframe
-                          src={`https://www.youtube.com/embed/${ytId(v.videoUrl)}`}
+                          src={`https://www.youtube.com/embed/${ytId(v.videoUrl!)}`}
                           title={v.title}
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
                           className="w-full h-full"
                         ></iframe>
                       </div>
+                      )}
                     </div>
                   )}
                 </div>
