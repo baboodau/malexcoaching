@@ -241,3 +241,23 @@ export function PrivacyPolicy() {
     />
   );
 }
+
+export function ContactPage() {
+  return (
+    <LegalPage
+      title="Contact Us / Legal Notice"
+      effectiveDate={EFFECTIVE_DATE}
+      sections={[
+        {
+          heading: "Business Information",
+          items: ["Business Name: Malex Coaching", "Website: www.malexcoaching.com"],
+        },
+        {
+          heading: "Support",
+          body: "For support or questions about coaching services, contact us using the details below.",
+          items: [`Support Email: ${SUPPORT_EMAIL}`, "Phone / WhatsApp: +60 11-6118 1283"],
+        },
+      ]}
+    />
+  );
+}
