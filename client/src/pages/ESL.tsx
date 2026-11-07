@@ -149,11 +149,11 @@ export default function ESL() {
             <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
               We help busy men <span className="text-yellow-400">transform their physique.</span>
             </h1>
-            <p className="text-xl font-semibold text-white mb-3">In 3 hours per week.</p>
-            <p className="text-lg font-semibold text-yellow-300 mb-3">Lose the belly without giving up your 40-hour week.</p>
+            <p className="text-xl md:text-2xl font-semibold text-white mb-4 leading-snug">
+              In 3 hours per week, lose the belly without giving up your <span className="text-yellow-300">40-hour work week.</span>
+            </p>
             <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-              Build muscle, lose fat, and create a physique you can maintain for life — with a personalized coaching
-              system designed around your schedule.
+              Build muscle, lose fat, and keep a physique you can maintain for life with a coaching system designed around your schedule.
             </p>
             <div className="flex flex-wrap gap-3">
               <BookButton />
@@ -184,7 +184,7 @@ export default function ESL() {
       <TrustedStrip />
 
       {/* PROBLEM */}
-      <section className="px-4 py-24 border-t border-yellow-500/15">
+      <section className="px-4 pt-24 pb-6 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
           <SectionHead eyebrow="Sound familiar?" title="Successful everywhere except the mirror." />
           <div className="grid md:grid-cols-3 gap-5">
@@ -200,7 +200,7 @@ export default function ESL() {
       </section>
 
       {/* METHOD */}
-      <section id="method" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
+      <section id="method" className="scroll-mt-20 px-4 pt-6 pb-24">
         <div className="max-w-6xl mx-auto">
           <SectionHead eyebrow="The Malex method" title="Plan. Train. Keep it." sub="A system built around your life, not the other way round." />
           <div className="grid md:grid-cols-3 gap-5">
