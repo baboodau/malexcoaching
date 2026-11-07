@@ -5,6 +5,7 @@ import { ClientResults } from "@/components/ClientResults";
 import { ClientWins } from "@/components/ClientWins";
 import { VideoTestimonials } from "@/components/VideoTestimonials";
 import { Coaches } from "@/components/Coaches";
+import { ApplicationGate, BookNote, CoachingAppSection, HowCallWorks, ResultsInNumbers, TrustedStrip } from "@/components/FunnelAdditions";
 
 /**
  * ESL (Entry Sales Letter) - Main Landing Page
@@ -60,6 +61,7 @@ const METHOD = [
 
 const FAQS: { q: string; a: string; v?: string }[] = [
   { q: "Is the strategy call free?", a: "Yes. It's a free 30-minute call where we look at where you are, what's held you back, and the exact plan to reach your goal." },
+  { q: "What happens on the call?", a: "A free 30-minute 1-on-1 call: we look at where you are, what has held you back, and build your plan together. You leave with a clear plan either way, with no pressure to sign up." },
   { q: "Do I need gym experience?", a: "No. Your plan is built for your level and your schedule, and every exercise comes with video guidance." },
   { q: "How fast will I see results?", a: "Sash explains realistic timelines for seeing your transformation.", v: "290d21a6a7cd496b89bedb3fe20d04af" },
   { q: "Will I have time to do the program?", a: "Around 3 hours of training a week, built around your schedule. Sash explains how it fits a busy life.", v: "e8a60b20fca74a5f82605f3b9e584ad6" },
@@ -149,6 +151,7 @@ export default function ESL() {
               We help busy men <span className="text-yellow-400">transform their physique.</span>
             </h1>
             <p className="text-xl font-semibold text-white mb-3">In 3 hours per week.</p>
+            <p className="text-lg font-semibold text-yellow-300 mb-3">Lose the belly without giving up your 50-hour week.</p>
             <p className="text-lg text-gray-300 mb-8 leading-relaxed">
               Build muscle, lose fat, and create a physique you can maintain for life — with a personalized coaching
               system designed around your schedule.
@@ -178,6 +181,8 @@ export default function ESL() {
           ))}
         </div>
       </section>
+
+      <TrustedStrip />
 
       {/* PROBLEM */}
       <section className="px-4 py-24 border-t border-yellow-500/15">
@@ -211,6 +216,8 @@ export default function ESL() {
         </div>
       </section>
 
+      <CoachingAppSection />
+
       {/* WHAT YOU GET ON THE CALL */}
       <section id="call" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
@@ -219,16 +226,23 @@ export default function ESL() {
           <div className="flex justify-center mt-10">
             <BookButton />
           </div>
+          <BookNote />
         </div>
       </section>
+
+      <HowCallWorks />
 
       {/* BOOK */}
       <section id="book" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-3xl mx-auto">
           <SectionHead eyebrow="30-minute strategy call" title="I'm ready to change my life" sub="Pick a time that works best for you." />
-          <div className="rounded-2xl border border-yellow-500/30 p-1 bg-gray-950">
-            <iframe title="Book your call" src={`${CALENDLY}&embed_type=Inline&embed_domain=${typeof window !== "undefined" ? window.location.host : "malexcoaching.com"}`} width="100%" height="650" frameBorder="0" className="rounded-xl"></iframe>
-          </div>
+          <ApplicationGate>
+            {(qs) => (
+            <div className="rounded-2xl border border-yellow-500/30 p-1 bg-gray-950">
+                <iframe title="Book your call" src={`${CALENDLY}&embed_type=Inline&embed_domain=${typeof window !== "undefined" ? window.location.host : "malexcoaching.com"}${qs}`} width="100%" height="650" frameBorder="0" className="rounded-xl"></iframe>
+              </div>
+            )}
+          </ApplicationGate>
           <ul className="mt-8 grid sm:grid-cols-3 gap-3 text-sm text-gray-300">
             {["Free, no obligation", "Personal plan on the call", "Spots are limited"].map((t) => (
               <li key={t} className="flex items-center gap-2 justify-center">
@@ -246,8 +260,11 @@ export default function ESL() {
           <div className="flex justify-center mt-12">
             <BookButton />
           </div>
+          <BookNote />
         </div>
       </section>
+
+      <ResultsInNumbers />
 
       {/* CLIENT WINS */}
       <section id="wins" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
