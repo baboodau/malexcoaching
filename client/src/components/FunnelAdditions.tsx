@@ -55,65 +55,27 @@ export function TrustedStrip() {
   );
 }
 
-/* ---------- 4 + 5. Big-number cards and outcome cards ---------- */
-const BIG = [
-  ["-21KG", "Jacob", "6 months"],
-  ["-30KG", "Ryan", "8 months"],
-  ["+23KG", "Fice", "12 months"],
-  ["-19KG", "Mo", "3 months"],
-  ["+18KG", "Omar", "6 months, plus abs"],
-  ["-20KG", "Daniel", "4 months"],
-  ["+17KG", "Hakeem", "6 months, got abs"],
-  ["-15KG", "Isaac", "4 months"],
-];
-
-const OUTCOMES: { name: string; tag: string; lines: string[] }[] = [
-  { name: "Ryan", tag: "Down 20 lbs in 30 days", lines: ["Down 20 lbs", "In 30 days", "Coached 1-on-1"] },
-  { name: "Mark", tag: "65 years old", lines: ["Got rid of chronic joint pain", "Without a doctor", "At 65 years old"] },
-  { name: "Andrey", tag: "Busy 9-5 man", lines: ["Lost his beer belly", "Got a defined jaw", "As a busy working 9-5 man"] },
-  { name: "David", tag: "20% to 9% body fat", lines: ["Went from 20% to 9% body fat", "Got abs", "In ONE month"] },
-  { name: "Lamar", tag: "Six-pack in half a year", lines: ["Built a six-pack", "In half a year", "Coached 1-on-1"] },
-  { name: "Humza", tag: "Built muscle", lines: ["Built muscle", "Got abs", "Coached 1-on-1"] },
+/* ---------- Across all clients (ballpark, one compact section) ---------- */
+const TOTALS: [string, string, string][] = [
+  ["200+", "clients coached 1-on-1", "Busy men, 25 to 65 years old"],
+  ["10-15 kg", "average fat lost", "100+ clients came to lose fat"],
+  ["Up to +23 kg", "of muscle built", "Clients who came to build size"],
+  ["Abs", "defined, not just a lighter scale", "Omar, Hakeem, Alexander, Darsh and more"],
 ];
 
 export function ResultsInNumbers() {
   return (
-    <section className="px-4 py-24 border-t border-yellow-500/15">
-      <div className="max-w-6xl mx-auto">
-        <Head eyebrow="The numbers" title="Results in black and white" sub="Real clients, real timelines. Every number comes from a client we coached 1-on-1." />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14">
-          {BIG.map(([n, name, t]) => (
-            <div key={name + n} className={`${card} p-5 text-center`}>
-              <p className="text-4xl md:text-5xl font-bold text-yellow-400">{n}</p>
-              <p className="font-bold text-white mt-2">{name}</p>
+    <section className="px-4 py-20 border-t border-yellow-500/15">
+      <div className="max-w-5xl mx-auto">
+        <Head eyebrow="Across all our clients" title="What 200+ clients added up to" sub="Fat loss, muscle and abs, from men with a full-time job." />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {TOTALS.map(([n, l, t]) => (
+            <div key={l} className={`${card} p-5 text-center`}>
+              <p className="text-2xl md:text-3xl font-bold text-yellow-400">{n}</p>
+              <p className="font-bold text-white mt-2">{l}</p>
               <p className="text-xs text-gray-400 mt-1">{t}</p>
             </div>
           ))}
-        </div>
-        <div className="grid md:grid-cols-3 gap-5">
-          {OUTCOMES.map((o) => (
-            <div key={o.name} className={`${card} p-6`}>
-              <p className="text-yellow-400 font-bold text-xs tracking-widest uppercase mb-2">{o.tag}</p>
-              <h3 className="text-xl font-bold mb-3">{o.name}</h3>
-              <ul className="space-y-2">
-                {o.lines.map((l) => (
-                  <li key={l} className="flex items-start gap-2 text-gray-300 text-sm">
-                    <Check className="w-4 h-4 text-yellow-400 mt-0.5 shrink-0" />
-                    {l}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <div className="flex flex-col items-center mt-10">
-          <a
-            href="#book"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 text-black font-bold shadow-lg shadow-yellow-500/25 hover:brightness-110 transition-all duration-300"
-          >
-            Book my free strategy call <ArrowRight className="w-4 h-4" />
-          </a>
-          <BookNote />
         </div>
       </div>
     </section>
@@ -149,34 +111,6 @@ export function CoachingAppSection() {
               className="w-full h-auto rounded-[1.5rem] border border-yellow-500/30 shadow-xl shadow-yellow-500/10"
             />
           ))}
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6 mt-14 items-stretch">
-          <div className={`${card} p-6`}>
-            <div className="flex items-center justify-between mb-5">
-              <p className="font-bold text-lg">Weekly check-in</p>
-              <span className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full bg-gradient-to-r from-yellow-300 to-amber-500 text-black">Example week</span>
-            </div>
-            <div className="grid grid-cols-2 gap-3 text-sm">
-              {[
-                ["Sessions", "3 / 3"],
-                ["Protein", "6 / 7 days"],
-                ["Avg steps", "9,340"],
-                ["Avg sleep", "7h 10m"],
-                ["Weight", "-1.4 kg"],
-                ["Waist", "-1 cm"],
-              ].map(([k, v]) => (
-                <div key={k} className="rounded-xl bg-black/40 border border-yellow-500/15 p-3">
-                  <p className="text-gray-400 text-xs">{k}</p>
-                  <p className="text-white font-bold text-lg">{v}</p>
-                </div>
-              ))}
-            </div>
-            <p className="text-xs text-gray-500 mt-4">Your coach reviews it and replies within 24 hours. Figures shown are an example, not a real client.</p>
-          </div>
-          <div className={`${card} p-6 flex items-center justify-center`}>
-            <img src="/media/malex-call/malex-upload-E/miro-system.jpg" alt="The Malex Coaching system" loading="lazy" className="w-full rounded-xl" />
-          </div>
         </div>
       </div>
     </section>
@@ -243,6 +177,7 @@ export function ApplicationGate({ children }: { children: (qs: string) => ReactN
     }
     if (step === 2 && !a.goal) return setErr("Pick your main goal.");
     if (step === 3 && !a.invest) return setErr("Choose one to continue.");
+    if (step === 3 && a.invest === "Not right now") return setErr("This coaching is a financial investment. Come back when you are ready to invest in your time and physique.");
     if (step === 4 && !a.hours) return setErr("Pick your weekly training time.");
     setErr("");
     setStep(step + 1);
@@ -283,8 +218,8 @@ export function ApplicationGate({ children }: { children: (qs: string) => ReactN
             )}
             {step === 3 && (
               <div>
-                <h3 className="text-xl font-bold mb-3">Are you ready to invest in yourself right now?</h3>
-                <Choice options={["Yes, I am ready", "I want to learn more first"]} value={a.invest} onPick={(v) => setA({ ...a, invest: v })} />
+                <h3 className="text-xl font-bold mb-3">Are you willing to financially invest in your time and physique?</h3>
+                <Choice options={["Yes, I am willing to invest", "Not right now"]} value={a.invest} onPick={(v) => setA({ ...a, invest: v })} />
               </div>
             )}
             {step === 4 && (
