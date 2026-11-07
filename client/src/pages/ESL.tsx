@@ -67,6 +67,9 @@ const FAQS: { q: string; a: string; v?: string }[] = [
   { q: "What if I don't get the same results as your clients?", a: "Realistic expectations and how we adjust the plan to you.", v: "2f11bbdb6cf04e1092316c800b5c92bc" },
   { q: "What if I'm not satisfied with the program?", a: "We sign a results agreement with every client. Sash walks through the guarantee.", v: "7c8dc1c170064c4a83b08c13c3ff0731" },
   { q: "What if I'm already with another coach?", a: "How switching to Malex works if you already have a coach.", v: "4525b80857db41048ba55da74378c766" },
+  { q: "What is your proof?", a: "Real client results and how they were achieved, explained by Sash.", v: "4e3aa124a7f6415ca8f8e63d853fbf28" },
+  { q: "How does your program work?", a: "A walkthrough of the process from onboarding to your first results.", v: "b842fa625e844521b9edf2ecc43083f1" },
+  { q: "What should my mindset be for the call?", a: "How to show up to your strategy call so we get the most out of it.", v: "c531c6ffe7354747b0b57597655120db" },
   { q: "Will I be able to afford it?", a: "How to think about the investment in your transformation.", v: "f1cf6deebd6944a0a076faeff62b1af4" },
 ];
 
