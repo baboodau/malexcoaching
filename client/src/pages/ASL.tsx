@@ -347,7 +347,7 @@ export default function ASL() {
 
       <section id="wins" className="scroll-mt-20 px-4 py-16 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
-          <ClientWins initial={6} />
+          <ClientWins initial={8} />
         </div>
       </section>
 
