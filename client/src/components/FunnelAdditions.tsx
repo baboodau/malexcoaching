@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, Check, Lock, Unlock } from "lucide-react";
 
 const card =
@@ -55,27 +55,83 @@ export function TrustedStrip() {
   );
 }
 
-/* ---------- Across all clients (ballpark, one compact section) ---------- */
-const TOTALS: [string, string, string][] = [
-  ["200+", "clients coached 1-on-1", "Busy men, 25 to 65 years old"],
-  ["2,000 kg", "of fat lost in total", "Across all our clients"],
-  ["1,000 kg", "of muscle gained in total", "Across all our clients"],
-  ["100+", "clients got abs", "Visible, defined abs"],
-];
+/* ---------- Across all clients: animated totals ---------- */
+const KG_TO_LB = 2.20462;
+
+function useInView<T extends Element>() {
+  const ref = useRef<T | null>(null);
+  const [seen, setSeen] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === "undefined") { setSeen(true); return; }
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setSeen(true); io.disconnect(); } }, { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return [ref, seen] as const;
+}
+
+function useCountUp(target: number, run: boolean, ms = 2200) {
+  const [v, setV] = useState(0);
+  useEffect(() => {
+    if (!run) return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) { setV(target); return; }
+    let raf = 0;
+    const t0 = performance.now();
+    const tick = (t: number) => {
+      const p = Math.min((t - t0) / ms, 1);
+      setV(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [run, target, ms]);
+  return v;
+}
+
+const fmt = (n: number, d = 1) => n.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+
+function TotalCard({ label, kg, run, icon, max }: { label: string; kg: number; run: boolean; icon: string; max: number }) {
+  const v = useCountUp(kg, run);
+  const pct = (v / max) * 100;
+  return (
+    <div className={`${card} p-7 md:p-8`}>
+      <p className="text-yellow-400 font-bold text-xs tracking-widest uppercase mb-4">{icon} {label}</p>
+      <p className="text-5xl md:text-6xl font-bold text-white leading-none tabular-nums">
+        {fmt(v)} <span className="text-2xl text-yellow-400">kg</span>
+      </p>
+      <p className="text-2xl md:text-3xl font-semibold text-yellow-300 mt-2 tabular-nums">
+        {fmt(v * KG_TO_LB)} <span className="text-lg text-yellow-400/80">lbs</span>
+      </p>
+      <div className="mt-6 h-3 rounded-full bg-white/10 overflow-hidden">
+        <div className="h-full rounded-full bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 shadow-[0_0_12px_rgba(250,204,21,0.5)]" style={{ width: `${pct}%` }} />
+      </div>
+      <p className="text-xs text-gray-400 mt-3">Combined total across all our clients</p>
+    </div>
+  );
+}
 
 export function ResultsInNumbers() {
+  const [ref, seen] = useInView<HTMLDivElement>();
+  const clients = useCountUp(200, seen, 1600);
+  const abs = useCountUp(100, seen, 1800);
   return (
     <section className="px-4 py-20 border-t border-yellow-500/15">
-      <div className="max-w-5xl mx-auto">
+      <div ref={ref} className="max-w-5xl mx-auto">
         <Head eyebrow="Across all our clients" title="What 200+ clients added up to" sub="Fat loss, muscle and abs, from men with a full-time job." />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {TOTALS.map(([n, l, t]) => (
-            <div key={l} className={`${card} p-5 text-center`}>
-              <p className="text-2xl md:text-3xl font-bold text-yellow-400">{n}</p>
-              <p className="font-bold text-white mt-2">{l}</p>
-              <p className="text-xs text-gray-400 mt-1">{t}</p>
-            </div>
-          ))}
+        <div className="grid md:grid-cols-2 gap-5">
+          <TotalCard label="Total fat lost" kg={1988.2} run={seen} icon="▼" max={1988.2} />
+          <TotalCard label="Total muscle built" kg={1262.8} run={seen} icon="▲" max={1988.2} />
+        </div>
+        <div className="grid grid-cols-2 gap-5 mt-5">
+          <div className={`${card} p-6 text-center`}>
+            <p className="text-4xl font-bold text-yellow-400 tabular-nums">{Math.round(clients)}+</p>
+            <p className="font-bold text-white mt-1">clients coached 1-on-1</p>
+          </div>
+          <div className={`${card} p-6 text-center`}>
+            <p className="text-4xl font-bold text-yellow-400 tabular-nums">{Math.round(abs)}+</p>
+            <p className="font-bold text-white mt-1">clients got abs</p>
+          </div>
         </div>
       </div>
     </section>
