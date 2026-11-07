@@ -151,7 +151,7 @@ export default function ESL() {
               We help busy men <span className="text-yellow-400">transform their physique.</span>
             </h1>
             <p className="text-xl font-semibold text-white mb-3">In 3 hours per week.</p>
-            <p className="text-lg font-semibold text-yellow-300 mb-3">Lose the belly without giving up your 50-hour week.</p>
+            <p className="text-lg font-semibold text-yellow-300 mb-3">Lose the belly without giving up your 40-hour week.</p>
             <p className="text-lg text-gray-300 mb-8 leading-relaxed">
               Build muscle, lose fat, and create a physique you can maintain for life — with a personalized coaching
               system designed around your schedule.
