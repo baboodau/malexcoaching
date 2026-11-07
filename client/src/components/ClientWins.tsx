@@ -177,8 +177,7 @@ export function ClientWins({ initial = 16 }: { initial?: number }) {
   const [extra, setExtra] = useState(0);
   const [open, setOpen] = useState<string | null>(null);
   const list = WINS.filter(([, t]) => tab === "all" || t === tab);
-  const base = (list.length - initial) % 2 ? initial - 1 : initial;
-  const count = Math.min(list.length, base + extra);
+  const count = Math.min(list.length, initial + extra);
   const visible = list.slice(0, count);
 
   return (
@@ -233,7 +232,7 @@ export function ClientWins({ initial = 16 }: { initial?: number }) {
             onClick={() => setExtra((e) => e + 16)}
             className="px-8 py-3 rounded-full border border-yellow-500/40 text-yellow-300 font-semibold hover:bg-yellow-500/10 transition-colors duration-300"
           >
-            Show more ({list.length - count})
+            {list.length - count > 16 ? "Show 16 more" : "Show all"}
           </button>
         </div>
       )}
