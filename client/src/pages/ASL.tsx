@@ -4,6 +4,7 @@ import { ClientResults } from "@/components/ClientResults";
 import { ClientWins } from "@/components/ClientWins";
 import { VideoTestimonials } from "@/components/VideoTestimonials";
 import { Coaches } from "@/components/Coaches";
+import { ProofTabs } from "@/components/FunnelAdditions";
 
 /**
  * ASL (After Sales Letter) - Post-Booking Page
@@ -331,58 +332,51 @@ export default function ASL() {
         </div>
       </section>
 
-      {/* RESULTS */}
+      {/* PROOF (results, wins, videos, case studies in one place) */}
       <section id="results" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
-          <ClientResults initial={12} />
-        </div>
-      </section>
-
-      {/* CLIENT WINS */}
-      <section id="wins" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
-        <div className="max-w-6xl mx-auto">
-          <ClientWins initial={12} />
-        </div>
-      </section>
-
-      {/* VIDEO TESTIMONIALS */}
-      <section id="testimonials" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
-        <div className="max-w-6xl mx-auto">
-          <VideoTestimonials initial={8} />
-        </div>
-      </section>
-
-      {/* CASE STUDIES */}
-      <section className="px-4 py-24 border-t border-yellow-500/15">
-        <div className="max-w-6xl mx-auto">
-          <SectionHead eyebrow="In their words" title="Client case studies" sub="Hear it straight from the men who did it." />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {cases.map((c) => (
-              <div key={c.id} className="rounded-2xl border border-yellow-500/25 bg-gradient-to-b from-[#15110a] to-[#0a0806] transition-all duration-500 hover:border-yellow-400/50 overflow-hidden">
-                <div className="aspect-video bg-black">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${c.id}?quality=hd&vq=hd720`}
-                    title={c.title}
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                  ></iframe>
-                </div>
-                <p className="p-4 text-sm text-gray-300">{c.title}</p>
+          <ProofTabs
+            tabs={[
+              { label: "Results", node: <ClientResults initial={12} /> },
+              { label: "Client wins", node: <ClientWins initial={12} /> },
+              { label: "Video testimonials", node: <VideoTestimonials initial={8} /> },
+              {
+                label: "Case studies",
+                node: (
+                  <div>
+              <SectionHead eyebrow="In their words" title="Client case studies" sub="Hear it straight from the men who did it." />
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {cases.map((c) => (
+                  <div key={c.id} className="rounded-2xl border border-yellow-500/25 bg-gradient-to-b from-[#15110a] to-[#0a0806] transition-all duration-500 hover:border-yellow-400/50 overflow-hidden">
+                    <div className="aspect-video bg-black">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${c.id}?quality=hd&vq=hd720`}
+                        title={c.title}
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full"
+                      ></iframe>
+                    </div>
+                    <p className="p-4 text-sm text-gray-300">{c.title}</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          {caseStudies.length > caseBase && (
-            <div className="flex justify-center mt-10">
-              <button
-                onClick={() => setShowAllCases(!showAllCases)}
-                className="px-8 py-3 rounded-xl border border-yellow-400/50 text-yellow-400 font-semibold hover:bg-yellow-400/10 transition-colors"
-              >
-                {showAllCases ? "Show less" : `Show more (${caseStudies.length - caseBase})`}
-              </button>
-            </div>
-          )}
+              {caseStudies.length > caseBase && (
+                <div className="flex justify-center mt-10">
+                  <button
+                    onClick={() => setShowAllCases(!showAllCases)}
+                    className="px-8 py-3 rounded-xl border border-yellow-400/50 text-yellow-400 font-semibold hover:bg-yellow-400/10 transition-colors"
+                  >
+                    {showAllCases ? "Show less" : `Show more (${caseStudies.length - caseBase})`}
+                  </button>
+                </div>
+              )}
+                  </div>
+                ),
+              },
+            ]}
+          />
         </div>
       </section>
 
