@@ -98,10 +98,10 @@ function TotalCard({ label, kg, run, icon, max }: { label: string; kg: number; r
     <div className={`${card} p-7 md:p-8`}>
       <p className="text-yellow-400 font-bold text-xs tracking-widest uppercase mb-4">{icon} {label}</p>
       <p className="text-5xl md:text-6xl font-bold text-white leading-none tabular-nums">
-        {fmt(v)} <span className="text-2xl text-yellow-400">kg</span>
+        {fmt(v, 0)} <span className="text-2xl text-yellow-400">kg</span>
       </p>
       <p className="text-2xl md:text-3xl font-semibold text-yellow-300 mt-2 tabular-nums">
-        {fmt(v * KG_TO_LB)} <span className="text-lg text-yellow-400/80">lbs</span>
+        {fmt(v * KG_TO_LB, 0)} <span className="text-lg text-yellow-400/80">lbs</span>
       </p>
       <div className="mt-6 h-3 rounded-full bg-white/10 overflow-hidden">
         <div className="h-full rounded-full bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 shadow-[0_0_12px_rgba(250,204,21,0.5)]" style={{ width: `${pct}%` }} />
@@ -121,7 +121,7 @@ export function ResultsInNumbers() {
         <Head eyebrow="Across all our clients" title="What 200+ clients added up to" sub="Fat loss, muscle and abs, from men with a full-time job." />
         <div className="grid md:grid-cols-2 gap-5">
           <TotalCard label="Total fat lost" kg={1989} run={seen} icon="▼" max={1989} />
-          <TotalCard label="Total muscle built" kg={1266} run={seen} icon="▲" max={1989} />
+          <TotalCard label="Total muscle built" kg={1209} run={seen} icon="▲" max={1989} />
         </div>
         <div className="grid grid-cols-2 gap-5 mt-5">
           <div className={`${card} p-6 text-center`}>
