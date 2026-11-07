@@ -25,14 +25,14 @@ export function CallBenefitsAnimation() {
       description: "A custom roadmap showing you exactly how to achieve your fitness goal using a system that takes less than 3 hours per week.",
       icon: Award,
       color: "from-yellow-400 to-yellow-600",
-      image: "/media/malex-call/wyg-call-3.jpg",
+      image: "/media/malex-call/malex-upload-E/miro-inside.jpg",
     },
     {
       title: "Clear Next Steps",
       description: "A simple action plan so you know exactly what to do after the call.",
       icon: Check,
       color: "from-yellow-400 to-yellow-600",
-      image: "/media/malex-call/wyg-call-4.jpg",
+      image: "/media/malex-call/malex-upload-E/miro-system.jpg",
     },
   ];
 
