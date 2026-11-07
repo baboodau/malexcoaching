@@ -244,15 +244,9 @@ export default function ASL() {
               </div>
             ))}
           </div>
-          <div className="max-w-4xl mx-auto rounded-2xl border border-yellow-500/30 p-1 bg-gray-950">
-            <div className="aspect-video rounded-xl overflow-hidden bg-black">
-              <iframe
-                src="https://www.youtube.com/embed/CvT4X-0pGbU"
-                title="How to Prepare for This Call"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              ></iframe>
+          <div className="max-w-sm mx-auto rounded-2xl border border-yellow-500/30 p-1 bg-gray-950">
+            <div className="aspect-[9/16] max-h-[80vh] mx-auto rounded-xl overflow-hidden bg-black">
+              <video src="/media/malex-call/malex-upload-E/prep-call.mp4" controls playsInline preload="metadata" className="w-full h-full object-contain" />
             </div>
           </div>
         </div>
@@ -279,8 +273,8 @@ export default function ASL() {
             </ul>
           </div>
           <div className="space-y-4">
-            <img src="/media/malex-call/wyg-call-3.jpg" alt="Inside the Malex program" loading="lazy" className="w-full rounded-2xl border border-yellow-500/30" />
-            <img src="/media/malex-call/wyg-call-4.jpg" alt="The Malex coaching system" loading="lazy" className="w-full rounded-2xl border border-yellow-500/30" />
+            <img src="/media/malex-call/malex-upload-E/miro-inside.jpg" alt="Inside the Malex program" loading="lazy" className="w-full rounded-2xl border border-yellow-500/30" />
+            <img src="/media/malex-call/malex-upload-E/miro-system.jpg" alt="The Malex coaching system" loading="lazy" className="w-full rounded-2xl border border-yellow-500/30" />
           </div>
         </div>
       </section>
