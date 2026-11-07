@@ -253,7 +253,7 @@ export default function ESL() {
       <ResultsInNumbers />
 
       {/* PROOF (results, wins, videos, case studies in one place) */}
-      <section id="results" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
+      <section id="results" className="scroll-mt-20 px-4 pt-4 pb-24">
         <div className="max-w-6xl mx-auto">
           <ProofTabs
             tabs={[

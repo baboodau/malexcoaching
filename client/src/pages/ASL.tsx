@@ -404,7 +404,10 @@ export default function ASL() {
                     className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-gray-900/60 transition-colors"
                   >
                     <div>
-                      <p className="font-bold text-white">{v.title}</p>
+                      <p className="font-bold text-white flex items-center gap-2">
+                        {v.videoUrl && <span className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full bg-gradient-to-r from-yellow-300 to-amber-500 text-black">Video</span>}
+                        {v.title}
+                      </p>
                       {v.videoUrl && <p className="text-sm text-gray-400 mt-1">{v.description}</p>}
                     </div>
                     <ChevronDown className={`w-5 h-5 text-yellow-400 shrink-0 transition-transform ${open ? "rotate-180" : ""}`} />
