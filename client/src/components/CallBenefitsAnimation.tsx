@@ -18,7 +18,7 @@ export function CallBenefitsAnimation() {
       icon: Zap,
       color: "from-yellow-400 to-yellow-600",
       image: "/media/malex-call/Gemini_Generated_Image_pshkwjpshkwjpshk.jpg",
-      fit: "contain",
+      pos: "50% 54%",
     },
     {
       title: "Personalized Roadmap",
@@ -91,14 +91,11 @@ export function CallBenefitsAnimation() {
                 <div className="space-y-6 animate-fade-in">
                   {/* Image Display */}
                   <div className="w-full rounded-2xl p-[1px] bg-gradient-to-b from-yellow-400/60 via-yellow-600/25 to-yellow-900/10 shadow-lg shadow-yellow-900/30">
-                    <div className="rounded-2xl overflow-hidden bg-[#0a0806] aspect-[16/10] relative">
-                    {(steps[activeStep] as { fit?: string }).fit === "contain" && (
-                      <img src={steps[activeStep].image} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 scale-110" />
-                    )}
+                    <div className="rounded-2xl overflow-hidden bg-[#0a0806] aspect-[16/10]">
                     <img 
                       src={steps[activeStep].image} 
                       alt={steps[activeStep].title}
-                      className={`relative w-full h-full ${(steps[activeStep] as { fit?: string }).fit === "contain" ? "object-contain" : "object-cover"}`}
+                      className="w-full h-full object-cover"
                       style={{ transform: `scale(${(steps[activeStep] as { zoom?: number }).zoom ?? 1})`, objectPosition: (steps[activeStep] as { pos?: string }).pos ?? "50% 50%" }}
                     />
                     </div>
