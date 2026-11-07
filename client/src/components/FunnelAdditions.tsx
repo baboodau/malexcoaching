@@ -320,3 +320,29 @@ export function ApplicationGate({ children }: { children: (qs: string) => ReactN
     </div>
   );
 }
+
+export function ProofTabs({ tabs }: { tabs: { label: string; node: ReactNode }[] }) {
+  const [i, setI] = useState(0);
+  return (
+    <div>
+      <div className="text-center mb-10">
+        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-yellow-400 mb-3">The proof</p>
+        <div className="inline-flex flex-wrap justify-center gap-2 rounded-2xl border border-yellow-500/25 bg-black/60 p-1.5">
+          {tabs.map((t, k) => (
+            <button
+              key={t.label}
+              type="button"
+              onClick={() => setI(k)}
+              className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
+                i === k ? "bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 text-black shadow-md shadow-yellow-500/25" : "text-gray-300 hover:text-yellow-300"
+              }`}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+      </div>
+      {tabs[i].node}
+    </div>
+  );
+}
