@@ -208,12 +208,12 @@ export function ClientWins({ initial = 16 }: { initial?: number }) {
         ))}
       </div>
 
-      <div className="columns-2 md:columns-3 lg:columns-4 gap-4 [column-fill:_balance]">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 items-start">
         {visible.map(([f]) => (
           <button
             key={f}
             onClick={() => setOpen(f)}
-            className="group mb-4 block w-full break-inside-avoid rounded-2xl p-[1px] bg-gradient-to-b from-yellow-400/60 via-yellow-600/25 to-yellow-900/10 shadow-lg shadow-yellow-900/20 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-yellow-500/25"
+            className="group block w-full rounded-2xl p-[1px] bg-gradient-to-b from-yellow-400/60 via-yellow-600/25 to-yellow-900/10 shadow-lg shadow-yellow-900/20 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-yellow-500/25"
           >
             <div className="rounded-2xl overflow-hidden bg-[#0a0806]">
               <img
