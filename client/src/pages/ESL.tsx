@@ -252,55 +252,59 @@ export default function ESL() {
 
       <ResultsInNumbers />
 
-      {/* PROOF (results, wins, videos, case studies in one place) */}
-      <section id="results" className="scroll-mt-20 px-4 pt-4 pb-24">
+      {/* PROOF: results, videos, wins, case studies (all visible, no clicking) */}
+      <section id="results" className="scroll-mt-20 px-4 pt-6 pb-16">
         <div className="max-w-6xl mx-auto">
-          <ProofTabs
-            tabs={[
-              { label: "Results", node: <ClientResults initial={12} /> },
-              { label: "Client wins", node: <ClientWins initial={16} /> },
-              { label: "Video testimonials", node: <VideoTestimonials initial={8} /> },
-              {
-                label: "Case studies",
-                node: (
-                  <div>
-              <SectionHead eyebrow="In their words" title="Client case studies" sub="See what is possible when the right system is built around your lifestyle." />
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {cases.map((c) => (
-                  <div key={c.id} className="rounded-2xl border border-yellow-500/25 bg-gradient-to-b from-[#15110a] to-[#0a0806] transition-all duration-500 hover:border-yellow-400/50 overflow-hidden">
-                    <div className="aspect-video bg-black">
-                      <iframe
-                        src={`https://www.youtube.com/embed/${c.id}?quality=hd&vq=hd720`}
-                        title={c.title}
-                        loading="lazy"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="w-full h-full"
-                      ></iframe>
-                    </div>
-                    <p className="p-4 text-sm text-gray-300">{c.title}</p>
-                  </div>
-                ))}
-              </div>
-              {caseStudies.length > caseBase && (
-                <div className="flex justify-center mt-10">
-                  <button
-                    onClick={() => setShowAllCases(!showAllCases)}
-                    className="px-8 py-3 rounded-xl border border-yellow-400/50 text-yellow-400 font-semibold hover:bg-yellow-400/10 transition-colors"
-                  >
-                    {showAllCases ? "Show less" : `Show more (${caseStudies.length - caseBase})`}
-                  </button>
+          <ClientResults initial={6} />
+        </div>
+      </section>
+
+      <section id="testimonials" className="scroll-mt-20 px-4 py-16 border-t border-yellow-500/15 bg-yellow-500/[0.03]">
+        <div className="max-w-6xl mx-auto">
+          <VideoTestimonials initial={6} />
+        </div>
+      </section>
+
+      <section id="wins" className="scroll-mt-20 px-4 py-16 border-t border-yellow-500/15">
+        <div className="max-w-6xl mx-auto">
+          <ClientWins initial={6} />
+        </div>
+      </section>
+
+      <section id="case-studies" className="scroll-mt-20 px-4 py-16 border-t border-yellow-500/15 bg-yellow-500/[0.03]">
+        <div className="max-w-6xl mx-auto">
+          <SectionHead eyebrow="In their words" title="Client case studies" sub="See what is possible when the right system is built around your lifestyle." />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {cases.map((c) => (
+              <div key={c.id} className="rounded-2xl border border-yellow-500/25 bg-gradient-to-b from-[#15110a] to-[#0a0806] transition-all duration-500 hover:border-yellow-400/50 overflow-hidden">
+                <div className="aspect-video bg-black">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${c.id}?quality=hd&vq=hd720`}
+                    title={c.title}
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  ></iframe>
                 </div>
-              )}
-                  </div>
-                ),
-              },
-            ]}
-          />
-          <div className="flex justify-center mt-12">
-            <BookButton />
+                <p className="p-4 text-sm text-gray-300">{c.title}</p>
+              </div>
+            ))}
           </div>
-          <BookNote />
+          {caseStudies.length > caseBase && (
+            <div className="flex justify-center mt-10">
+              <button
+                onClick={() => setShowAllCases(!showAllCases)}
+                className="px-8 py-3 rounded-xl border border-yellow-400/50 text-yellow-400 font-semibold hover:bg-yellow-400/10 transition-colors"
+              >
+                {showAllCases ? "Show less" : `Show more (${caseStudies.length - caseBase})`}
+              </button>
+            </div>
+          )}
+          <div className="flex flex-col items-center mt-14">
+            <BookButton />
+            <BookNote />
+          </div>
         </div>
       </section>
 
