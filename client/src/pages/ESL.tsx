@@ -5,7 +5,7 @@ import { ClientResults } from "@/components/ClientResults";
 import { ClientWins } from "@/components/ClientWins";
 import { VideoTestimonials } from "@/components/VideoTestimonials";
 import { Coaches } from "@/components/Coaches";
-import { ApplicationGate, BookNote, CoachingAppSection, HowCallWorks, ResultsInNumbers, TrustedStrip } from "@/components/FunnelAdditions";
+import { ApplicationGate, BookNote, CoachingAppSection, ResultsInNumbers, TrustedStrip } from "@/components/FunnelAdditions";
 
 /**
  * ESL (Entry Sales Letter) - Main Landing Page
@@ -61,7 +61,6 @@ const METHOD = [
 
 const FAQS: { q: string; a: string; v?: string }[] = [
   { q: "Is the strategy call free?", a: "Yes. It's a free 30-minute call where we look at where you are, what's held you back, and the exact plan to reach your goal." },
-  { q: "What happens on the call?", a: "A free 30-minute 1-on-1 call: we look at where you are, what has held you back, and build your plan together. You leave with a clear plan either way, with no pressure to sign up." },
   { q: "Do I need gym experience?", a: "No. Your plan is built for your level and your schedule, and every exercise comes with video guidance." },
   { q: "How fast will I see results?", a: "Sash explains realistic timelines for seeing your transformation.", v: "290d21a6a7cd496b89bedb3fe20d04af" },
   { q: "Will I have time to do the program?", a: "Around 3 hours of training a week, built around your schedule. Sash explains how it fits a busy life.", v: "e8a60b20fca74a5f82605f3b9e584ad6" },
@@ -230,8 +229,6 @@ export default function ESL() {
         </div>
       </section>
 
-      <HowCallWorks />
-
       {/* BOOK */}
       <section id="book" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-3xl mx-auto">
@@ -253,6 +250,8 @@ export default function ESL() {
         </div>
       </section>
 
+      <ResultsInNumbers />
+
       {/* RESULTS */}
       <section id="results" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
@@ -263,8 +262,6 @@ export default function ESL() {
           <BookNote />
         </div>
       </section>
-
-      <ResultsInNumbers />
 
       {/* CLIENT WINS */}
       <section id="wins" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
@@ -277,16 +274,6 @@ export default function ESL() {
       <section id="testimonials" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15">
         <div className="max-w-6xl mx-auto">
           <VideoTestimonials initial={8} />
-        </div>
-      </section>
-
-      {/* COACHES */}
-      <section id="coaches" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15 text-center">
-        <div className="max-w-6xl mx-auto">
-          <SectionHead eyebrow="Who you'll work with" title="Meet your coaches" sub="Maho leads nutrition and fat loss. Sash leads training and muscle. You get both." />
-          <div className="-mt-16">
-            <Coaches />
-          </div>
         </div>
       </section>
 
@@ -321,6 +308,16 @@ export default function ESL() {
               </button>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* COACHES */}
+      <section id="coaches" className="scroll-mt-20 px-4 py-24 border-t border-yellow-500/15 text-center">
+        <div className="max-w-6xl mx-auto">
+          <SectionHead eyebrow="Who you'll work with" title="Meet your coaches" sub="Maho leads nutrition and fat loss. Sash leads training and muscle. You get both." />
+          <div className="-mt-16">
+            <Coaches />
+          </div>
         </div>
       </section>
 
