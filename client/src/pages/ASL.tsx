@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Check, ChevronDown, Play, Clock, Users, ShieldCheck, Video, CalendarCheck, Mail } from "lucide-react";
 import { ClientResults } from "@/components/ClientResults";
 import { ClientWins } from "@/components/ClientWins";
@@ -147,6 +147,60 @@ function SectionHead({ eyebrow, title, sub }: { eyebrow: string; title: string; 
 
 const loomId = (url: string) => url.match(/loom\.com\/share\/([a-f0-9]+)/)?.[1];
 
+function LockedVideo({ src }: { src: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const maxT = useRef(0);
+  const [playing, setPlaying] = useState(false);
+  const [pct, setPct] = useState(0);
+  const toggle = () => {
+    const v = ref.current;
+    if (!v) return;
+    if (v.paused) v.play(); else v.pause();
+  };
+  return (
+    <div className="relative aspect-video rounded-xl overflow-hidden bg-black select-none" onContextMenu={(e) => e.preventDefault()}>
+      <video
+        ref={ref}
+        src={src}
+        playsInline
+        preload="metadata"
+        controls={false}
+        disablePictureInPicture
+        controlsList="nodownload noplaybackrate noremoteplayback"
+        className="w-full h-full object-contain cursor-pointer"
+        onClick={toggle}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onTimeUpdate={(e) => {
+          const v = e.currentTarget;
+          if (v.currentTime > maxT.current) maxT.current = v.currentTime;
+          setPct(v.duration ? (v.currentTime / v.duration) * 100 : 0);
+        }}
+        onSeeking={(e) => {
+          const v = e.currentTarget;
+          if (v.currentTime > maxT.current + 0.5) v.currentTime = maxT.current;
+        }}
+        onRateChange={(e) => { e.currentTarget.playbackRate = 1; }}
+      />
+      {!playing && (
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label="Play video"
+          className="absolute inset-0 flex items-center justify-center bg-black/40"
+        >
+          <span className="w-20 h-20 rounded-full bg-gradient-to-b from-yellow-300 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-500/30">
+            <svg viewBox="0 0 24 24" className="w-9 h-9 ml-1 fill-black"><path d="M8 5v14l11-7z" /></svg>
+          </span>
+        </button>
+      )}
+      <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-white/10 pointer-events-none">
+        <div className="h-full bg-yellow-400" style={{ width: `${pct}%` }} />
+      </div>
+    </div>
+  );
+}
+
 export default function ASL() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showAllCases, setShowAllCases] = useState(false);
@@ -244,10 +298,8 @@ export default function ASL() {
               </div>
             ))}
           </div>
-          <div className="max-w-sm mx-auto rounded-2xl border border-yellow-500/30 p-1 bg-gray-950">
-            <div className="aspect-[9/16] max-h-[80vh] mx-auto rounded-xl overflow-hidden bg-black">
-              <video src="/media/malex-call/malex-upload-E/prep-call.mp4" controls playsInline preload="metadata" className="w-full h-full object-contain" />
-            </div>
+          <div className="max-w-4xl mx-auto rounded-2xl border border-yellow-500/30 p-1 bg-gray-950">
+            <LockedVideo src="/media/malex-call/prep-call-new.mp4" />
           </div>
         </div>
       </section>
