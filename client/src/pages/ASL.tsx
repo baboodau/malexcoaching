@@ -26,6 +26,11 @@ const objectionVideos: ObjectionVideo[] = [
     description: "Yes. It's a free 30-minute call where we look at where you are, what's held you back, and the exact plan to reach your goal.",
   },
   {
+    id: 102,
+    title: "What happens on the call?",
+    description: "A free 30-minute 1-on-1 call: we look at where you are, what has held you back, and build your plan together. You leave with a clear plan either way, with no pressure to sign up.",
+  },
+  {
     id: 103,
     title: "Do I need gym experience?",
     description: "No. Your plan is built for your level and your schedule, and every exercise comes with video guidance.",
