@@ -91,12 +91,13 @@ function useCountUp(target: number, run: boolean, ms = 2200) {
 
 const fmt = (n: number, d = 1) => n.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
 
-function TotalCard({ label, kg, run, icon, max }: { label: string; kg: number; run: boolean; icon: string; max: number }) {
+function TotalCard({ label, kg, run, max, week }: { label: string; kg: number; run: boolean; max: number; week: number }) {
   const v = useCountUp(kg, run);
+  const w = useCountUp(week, run, 2600);
   const pct = (v / max) * 100;
   return (
     <div className={`${card} p-7 md:p-8`}>
-      <p className="text-yellow-400 font-bold text-xs tracking-widest uppercase mb-4">{icon} {label}</p>
+      <p className="text-yellow-400 font-bold text-xs tracking-widest uppercase mb-4">{label}</p>
       <p className="text-5xl md:text-6xl font-bold text-white leading-none tabular-nums">
         {fmt(v, 0)} <span className="text-2xl text-yellow-400">kg</span>
       </p>
@@ -107,6 +108,14 @@ function TotalCard({ label, kg, run, icon, max }: { label: string; kg: number; r
         <div className="h-full rounded-full bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 shadow-[0_0_12px_rgba(250,204,21,0.5)]" style={{ width: `${pct}%` }} />
       </div>
       <p className="text-xs text-gray-400 mt-3">Combined total across all our clients</p>
+      <div className="mt-5 inline-flex items-center gap-2.5 rounded-full border border-yellow-400/40 bg-yellow-400/10 px-4 py-2">
+        <span className="relative flex h-2.5 w-2.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-yellow-400 opacity-75"></span>
+          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-yellow-400"></span>
+        </span>
+        <span className="text-xs font-bold uppercase tracking-wider text-yellow-400">This week</span>
+        <span className="text-sm font-bold text-white tabular-nums">+{Math.round(w)} kg · +{Math.round(w * KG_TO_LB)} lbs</span>
+      </div>
     </div>
   );
 }
@@ -120,8 +129,8 @@ export function ResultsInNumbers() {
       <div ref={ref} className="max-w-5xl mx-auto">
         <Head eyebrow="Across all our clients" title="What 200+ clients added up to" sub="Fat loss, muscle and abs, from men with a full-time job." />
         <div className="grid md:grid-cols-2 gap-5">
-          <TotalCard label="Total fat lost" kg={1989} run={seen} icon="▼" max={1989} />
-          <TotalCard label="Total muscle built" kg={1209} run={seen} icon="▲" max={1989} />
+          <TotalCard label="Total fat lost" kg={1989} run={seen} max={1989} week={11} />
+          <TotalCard label="Total muscle built" kg={1209} run={seen} max={1989} week={6} />
         </div>
         <div className="grid grid-cols-2 gap-5 mt-5">
           <div className={`${card} p-6 text-center`}>
