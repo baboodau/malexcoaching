@@ -91,13 +91,19 @@ export function CallBenefitsAnimation() {
                 <div className="space-y-6 animate-fade-in">
                   {/* Image Display */}
                   <div className="w-full rounded-2xl p-[1px] bg-gradient-to-b from-yellow-400/60 via-yellow-600/25 to-yellow-900/10 shadow-lg shadow-yellow-900/30">
-                    <div className="rounded-2xl overflow-hidden bg-[#0a0806] aspect-[16/10]">
-                    <img 
-                      src={steps[activeStep].image} 
-                      alt={steps[activeStep].title}
-                      className="w-full h-full object-cover"
-                      style={{ transform: `scale(${(steps[activeStep] as { zoom?: number }).zoom ?? 1})`, objectPosition: (steps[activeStep] as { pos?: string }).pos ?? "50% 50%" }}
-                    />
+                    <div className="relative rounded-2xl overflow-hidden bg-[#0a0806] aspect-[16/10]">
+                      {steps.map((st, i) => (
+                        <img
+                          key={st.image}
+                          src={st.image}
+                          alt={st.title}
+                          loading="eager"
+                          decoding="async"
+                          aria-hidden={i !== activeStep}
+                          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${i === activeStep ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+                          style={{ objectPosition: (st as { pos?: string }).pos ?? "50% 50%" }}
+                        />
+                      ))}
                     </div>
                   </div>
 
