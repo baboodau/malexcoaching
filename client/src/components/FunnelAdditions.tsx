@@ -129,8 +129,8 @@ export function ResultsInNumbers() {
       <div ref={ref} className="max-w-5xl mx-auto">
         <Head eyebrow="Across all our clients" title="What 200+ clients added up to" sub="Fat loss, muscle and abs, from men with a full-time job." />
         <div className="grid md:grid-cols-2 gap-5">
-          <TotalCard label="Total fat lost" kg={1989} run={seen} max={1989} week={11} />
-          <TotalCard label="Total muscle built" kg={1209} run={seen} max={1989} week={6} />
+          <TotalCard label="Total fat lost" kg={1989} run={seen} max={1989} week={18} />
+          <TotalCard label="Total muscle built" kg={1209} run={seen} max={1989} week={8} />
         </div>
         <div className="grid grid-cols-2 gap-5 mt-5">
           <div className={`${card} p-6 text-center`}>
