@@ -58,9 +58,9 @@ export function TrustedStrip() {
 /* ---------- Across all clients (ballpark, one compact section) ---------- */
 const TOTALS: [string, string, string][] = [
   ["200+", "clients coached 1-on-1", "Busy men, 25 to 65 years old"],
-  ["10-15 kg", "average fat lost", "100+ clients came to lose fat"],
-  ["Up to +23 kg", "of muscle built", "Clients who came to build size"],
-  ["Abs", "defined, not just a lighter scale", "Omar, Hakeem, Alexander, Darsh and more"],
+  ["2,000 kg", "of fat lost in total", "Across all our clients"],
+  ["1,000 kg", "of muscle gained in total", "Across all our clients"],
+  ["100+", "clients got abs", "Visible, defined abs"],
 ];
 
 export function ResultsInNumbers() {
@@ -177,9 +177,18 @@ export function ApplicationGate({ children }: { children: (qs: string) => ReactN
     }
     if (step === 2 && !a.goal) return setErr("Pick your main goal.");
     if (step === 3 && !a.invest) return setErr("Choose one to continue.");
-    if (step === 3 && a.invest === "Not right now") return setErr("This coaching is a financial investment. Come back when you are ready to invest in your time and physique.");
+    if (step === 3 && a.invest === "Not right now") return setErr("This coaching is a financial investment. Come back when you are ready to invest your time and finances into your physique.");
     if (step === 4 && !a.hours) return setErr("Pick your weekly training time.");
     setErr("");
+    if (step === 4) {
+      try {
+        fetch("https://formspree.io/f/xrppvkrp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({ name: a.name, email: a.email, whatsapp: a.phone, goal: a.goal, willing_to_invest: a.invest, hours_per_week: a.hours, _subject: "New Malex call application: " + a.name }),
+        }).catch(() => {});
+      } catch {}
+    }
     setStep(step + 1);
   };
 
@@ -218,7 +227,7 @@ export function ApplicationGate({ children }: { children: (qs: string) => ReactN
             )}
             {step === 3 && (
               <div>
-                <h3 className="text-xl font-bold mb-3">Are you willing to financially invest in your time and physique?</h3>
+                <h3 className="text-xl font-bold mb-3">Are you willing to invest your time and finances into your physique?</h3>
                 <Choice options={["Yes, I am willing to invest", "Not right now"]} value={a.invest} onPick={(v) => setA({ ...a, invest: v })} />
               </div>
             )}
