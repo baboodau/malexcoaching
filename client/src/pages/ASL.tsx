@@ -109,7 +109,7 @@ const caseStudies: { id: string; title: string }[] = [
   { id: "ipEZpc9lUWI", title: "Don’t watch this if you don’t want to be skinny anymore" },
   { id: "kBrZj-LJHy8", title: "How to regain your confidence as a skinny guy" },
   { id: "F6k0vK3xxGc", title: "How our client got big biceps and lost fat" },
-  { id: "zTcWwRDwdOc", title: "Client Success Story" }
+  { id: "zTcWwRDwdOc", title: "Client doubled his back size in 2 months" }
 ];
 
 const NAV = [
