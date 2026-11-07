@@ -33,61 +33,61 @@ const objectionVideos: ObjectionVideo[] = [
     id: 1,
     title: "How fast will I see results?",
     description: "Realistic timelines for seeing transformation results.",
-    videoUrl: "https://youtu.be/HR6PKD-JDWs",
+    videoUrl: "https://www.loom.com/share/290d21a6a7cd496b89bedb3fe20d04af",
   },
   {
     id: 2,
     title: "What are your client case studies?",
     description: "Real results from our clients' transformations.",
-    videoUrl: "https://youtu.be/EdqsKshWgE4",
+    videoUrl: "https://www.loom.com/share/4e3aa124a7f6415ca8f8e63d853fbf28",
   },
   {
     id: 3,
     title: "What does the process look like?",
     description: "A detailed walkthrough of our coaching process.",
-    videoUrl: "https://youtu.be/5kfXJGnUHSc",
+    videoUrl: "https://www.loom.com/share/b842fa625e844521b9edf2ecc43083f1",
   },
   {
     id: 4,
     title: "What if I don't get the same results as your clients?",
     description: "Understanding realistic expectations and your unique journey.",
-    videoUrl: "https://youtu.be/Sr2tq3RBwl0",
+    videoUrl: "https://www.loom.com/share/2f11bbdb6cf04e1092316c800b5c92bc",
   },
   {
     id: 5,
     title: "What if I'm not satisfied with the program?",
     description: "Learn about our satisfaction guarantee and support.",
-    videoUrl: "https://youtu.be/WRcpxQop12Q",
+    videoUrl: "https://www.loom.com/share/7c8dc1c170064c4a83b08c13c3ff0731",
   },
   {
     id: 6,
     title: "What if I'm with another coach?",
     description: "How to work with us while working with other coaches.",
-    videoUrl: "https://youtu.be/gkP-7sX7KXk",
+    videoUrl: "https://www.loom.com/share/4525b80857db41048ba55da74378c766",
   },
   {
     id: 7,
     title: "What should my mindset be for the call?",
     description: "Get in the right mindset before your strategy call.",
-    videoUrl: "https://youtu.be/DxdsF27F1bo",
+    videoUrl: "https://www.loom.com/share/c531c6ffe7354747b0b57597655120db",
   },
   {
     id: 8,
     title: "Will I be able to afford it?",
     description: "Understanding pricing and investment in your transformation.",
-    videoUrl: "https://youtu.be/iZw0btmKW3Y",
+    videoUrl: "https://www.loom.com/share/f1cf6deebd6944a0a076faeff62b1af4",
   },
   {
     id: 9,
     title: "Will I get personalized support?",
     description: "How we provide personalized coaching and support.",
-    videoUrl: "https://youtu.be/xA0JvOB7nQ0",
+    videoUrl: "https://www.loom.com/share/5e36b22deba144ff989e42e7e831d33a",
   },
   {
     id: 10,
     title: "Will I have time to do the program?",
     description: "How the program fits into your busy schedule.",
-    videoUrl: "https://youtu.be/58MwRglr8Gg",
+    videoUrl: "https://www.loom.com/share/e8a60b20fca74a5f82605f3b9e584ad6",
   },
 ];
 
@@ -145,7 +145,7 @@ function SectionHead({ eyebrow, title, sub }: { eyebrow: string; title: string; 
   );
 }
 
-const ytId = (url: string) => url.match(/youtu\.be\/([a-zA-Z0-9-_]+)/)?.[1];
+const loomId = (url: string) => url.match(/loom\.com\/share\/([a-f0-9]+)/)?.[1];
 
 export default function ASL() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -374,9 +374,9 @@ export default function ASL() {
                       {!v.videoUrl ? (
                         <p className="text-gray-300 leading-relaxed">{v.description}</p>
                       ) : (
-                      <div className="aspect-video rounded-xl overflow-hidden bg-black">
+                      <div className="aspect-[4/3] max-w-2xl mx-auto rounded-xl overflow-hidden bg-black">
                         <iframe
-                          src={`https://www.youtube.com/embed/${ytId(v.videoUrl!)}`}
+                          src={`https://www.loom.com/embed/${loomId(v.videoUrl!)}?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true`}
                           title={v.title}
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen

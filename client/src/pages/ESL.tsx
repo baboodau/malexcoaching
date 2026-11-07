@@ -61,13 +61,13 @@ const METHOD = [
 const FAQS: { q: string; a: string; v?: string }[] = [
   { q: "Is the strategy call free?", a: "Yes. It's a free 30-minute call where we look at where you are, what's held you back, and the exact plan to reach your goal." },
   { q: "Do I need gym experience?", a: "No. Your plan is built for your level and your schedule, and every exercise comes with video guidance." },
-  { q: "How fast will I see results?", a: "Sash explains realistic timelines for seeing your transformation.", v: "HR6PKD-JDWs" },
-  { q: "Will I have time to do the program?", a: "Around 3 hours of training a week, built around your schedule. Sash explains how it fits a busy life.", v: "58MwRglr8Gg" },
-  { q: "Will I get personalized support?", a: "How we coach you 1-on-1, with weekly check-ins and direct messaging.", v: "xA0JvOB7nQ0" },
-  { q: "What if I don't get the same results as your clients?", a: "Realistic expectations and how we adjust the plan to you.", v: "Sr2tq3RBwl0" },
-  { q: "What if I'm not satisfied with the program?", a: "We sign a results agreement with every client. Sash walks through the guarantee.", v: "WRcpxQop12Q" },
-  { q: "What if I'm already with another coach?", a: "How switching to Malex works if you already have a coach.", v: "gkP-7sX7KXk" },
-  { q: "Will I be able to afford it?", a: "How to think about the investment in your transformation.", v: "iZw0btmKW3Y" },
+  { q: "How fast will I see results?", a: "Sash explains realistic timelines for seeing your transformation.", v: "290d21a6a7cd496b89bedb3fe20d04af" },
+  { q: "Will I have time to do the program?", a: "Around 3 hours of training a week, built around your schedule. Sash explains how it fits a busy life.", v: "e8a60b20fca74a5f82605f3b9e584ad6" },
+  { q: "Will I get personalized support?", a: "How we coach you 1-on-1, with weekly check-ins and direct messaging.", v: "5e36b22deba144ff989e42e7e831d33a" },
+  { q: "What if I don't get the same results as your clients?", a: "Realistic expectations and how we adjust the plan to you.", v: "2f11bbdb6cf04e1092316c800b5c92bc" },
+  { q: "What if I'm not satisfied with the program?", a: "We sign a results agreement with every client. Sash walks through the guarantee.", v: "7c8dc1c170064c4a83b08c13c3ff0731" },
+  { q: "What if I'm already with another coach?", a: "How switching to Malex works if you already have a coach.", v: "4525b80857db41048ba55da74378c766" },
+  { q: "Will I be able to afford it?", a: "How to think about the investment in your transformation.", v: "f1cf6deebd6944a0a076faeff62b1af4" },
 ];
 
 function SectionHead({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string }) {
@@ -327,9 +327,9 @@ export default function ESL() {
                     <div className="px-5 pb-5">
                       <p className="text-gray-400 leading-relaxed">{f.a}</p>
                       {f.v && (
-                        <div className="mt-4 aspect-video rounded-xl overflow-hidden bg-black border border-yellow-500/20">
+                        <div className="mt-4 aspect-[4/3] max-w-2xl mx-auto rounded-xl overflow-hidden bg-black border border-yellow-500/20">
                           <iframe
-                            src={`https://www.youtube.com/embed/${f.v}?rel=0`}
+                            src={`https://www.loom.com/embed/${f.v}?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true`}
                             title={f.q}
                             loading="lazy"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
