@@ -116,12 +116,12 @@ export function ResultsInNumbers() {
   const clients = useCountUp(200, seen, 1600);
   const abs = useCountUp(100, seen, 1800);
   return (
-    <section className="px-4 py-20 border-t border-yellow-500/15">
+    <section className="px-4 pt-20 pb-2 border-t border-yellow-500/15">
       <div ref={ref} className="max-w-5xl mx-auto">
         <Head eyebrow="Across all our clients" title="What 200+ clients added up to" sub="Fat loss, muscle and abs, from men with a full-time job." />
         <div className="grid md:grid-cols-2 gap-5">
           <TotalCard label="Total fat lost" kg={1989} run={seen} icon="▼" max={1989} />
-          <TotalCard label="Total muscle built" kg={1262.8} run={seen} icon="▲" max={1989} />
+          <TotalCard label="Total muscle built" kg={1266} run={seen} icon="▲" max={1989} />
         </div>
         <div className="grid grid-cols-2 gap-5 mt-5">
           <div className={`${card} p-6 text-center`}>
